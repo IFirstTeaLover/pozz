@@ -13,76 +13,7 @@
 </head>
 
 <body>
-
-    <div class="currencies-display">
-        <div class="money-display">
-            <img class="money-icon" src="images/moneyIcon.svg"></img>
-            <p>0</p>
-        </div>
-    </div>
-
-    <div class="zones">
-        <div class="drills-zone shown zone">
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 0%;"></div>
-            </div>
-        </div>
-
-        <div class="shop-zone zone">
-            <div class="shop-upgrade coal-drill-speed">
-                <img class="upgrade-icon" src="images/inventory/coal.png"> <!--upgrade icon-->
-
-                <div class="upgrade-info-wrapper">
-                    <p class="upgrade-header-text">Higher coal drill speed</p>
-                    <p class="upgrade-bottom-text">Increases coal drill speed (5000 divided by level)</p>
-                    <p class="upgrade-amount-text">Level: 1</p>
-                    <p class="upgrade-price">$100</p>
-                </div>
-            </div>
-
-            <div class="shop-upgrade money-upgrade-tree">
-                <img class="upgrade-icon" src="images/tree.svg"> <!--upgrade icon-->
-
-                <div class="upgrade-info-wrapper">
-                    <p class="upgrade-header-text">Unlock upgrade tree</p>
-                    <p class="upgrade-bottom-text">Unlocks money upgrade tree</p>
-                    <p class="upgrade-amount-text">Unlocked: No</p>
-                    <p class="upgrade-price">$2500</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="inventory-zone zone">
-            <div class="inventory-card coal-card">
-                <p>Coal</p>
-                <p class="inv-amount">0x</p>
-                <img src="images/inventory/coal.png" class="item-preview">
-                <div class="inv-actions">
-                    <button class="inv-sell-button inv-btn">Sell</button>
-                    <button class="inv-more-button inv-btn">...</button>
-                    <button class="inv-sellall-button inv-btn">Sell All</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="money-upgrade-tree-zone zone shown">
-            <svg id="svg-canvas" style="position: absolute; width: 5000px; height: 5000px; pointer-events: none;">
-                <g id="line-group" style="width: 100cqw; height: 100cqh;"></g>
-            </svg>
-
-            <span id="origin" class="node" style="display: flex; justify-content: center; align-items: center; left: calc(2500px - 20px); top: 250px;">
-                <img src="images/MUP/drill.svg" style="width: 40px; aspect-ratio: 1/1; object-fit: contain;">
-            </span>
-
-            <div class="tooltip" style="top: 1px; left: 1px;">
-                <h2>Iron Drill</h2>
-                <h3>Unlocks iron drills</h3>
-                <h4>Price: $5000</h4>
-            </div>
-        </div>
-    </div>
-
-    <div class="bottom-bar">
+    <!-- <div class="bottom-bar">
         <button class="drills-button b-bar-button selected">
             <img src="/images/MUP/drill.svg">
         </button>
@@ -102,16 +33,127 @@
         <button class="blast-furnace-button b-bar-button">
             <img src="/images/blast_furnace.svg">
         </button>
+    </div> -->
+
+    <div class="left-bar">
+        <div class="currencies-display">
+            <div class="money-display">
+                <img class="money-icon" src="images/moneyIcon.svg"></img>
+                <p>0</p>
+            </div>
+        </div>
+
+        <button class="drills-button l-bar-button selected">
+            <div class="button-top-layer">
+                <img src="/images/MUP/drill.svg">
+                <h4>Drills</h4>
+            </div>
+        </button>
+
+        <!-- <button class="shop-button l-bar-button">
+            <img src="/images/shop.svg">
+            <h4>Shop</h4>
+        </button>
+
+        <button class="inventory-button l-bar-button">
+            <img src="/images/backpack.svg">
+            <h4>Inventory</h4>
+        </button>
+
+        <button class="money-upgrade-tree-button l-bar-button">
+            <img src="/images/tree.svg">
+            <h4>Upgrade Tree</h4>
+        </button>
+
+        <button class="blast-furnace-button l-bar-button">
+            <img src="/images/blast_furnace.svg">
+            <h4>Blast Furnace</h4>
+        </button> -->
     </div>
 
+    <div class="game">
+        <div class="zones">
+            <div class="drills-zone shown zone">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <div class="shop-zone zone">
+                <div class="shop-upgrade coal-drill-speed">
+                    <img class="upgrade-icon" src="images/inventory/coal.png"> <!--upgrade icon-->
+
+                    <div class="upgrade-info-wrapper">
+                        <p class="upgrade-header-text">Higher coal drill speed</p>
+                        <p class="upgrade-bottom-text">Increases coal drill speed (5000 divided by level)</p>
+                        <p class="upgrade-amount-text">Level: 1</p>
+                        <p class="upgrade-price">$100</p>
+                    </div>
+                </div>
+
+                <div class="shop-upgrade money-upgrade-tree">
+                    <img class="upgrade-icon" src="images/tree.svg"> <!--upgrade icon-->
+
+                    <div class="upgrade-info-wrapper">
+                        <p class="upgrade-header-text">Unlock upgrade tree</p>
+                        <p class="upgrade-bottom-text">Unlocks money upgrade tree</p>
+                        <p class="upgrade-amount-text">Unlocked: No</p>
+                        <p class="upgrade-price">$2500</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inventory-zone zone">
+                <div class="inventory-card coal-card">
+                    <p>Coal</p>
+                    <p class="inv-amount">0x</p>
+                    <img src="images/inventory/coal.png" class="item-preview">
+                    <div class="inv-actions">
+                        <button class="inv-sell-button inv-btn">Sell</button>
+                        <button class="inv-more-button inv-btn">...</button>
+                        <button class="inv-sellall-button inv-btn">Sell All</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="money-upgrade-tree-zone zone">
+                <!-- <svg id="svg-canvas" style="position: absolute; width: 5000px; height: 5000px; pointer-events: none;">
+                    <g id="line-group" style="width: 100cqw; height: 100cqh;"></g>
+                </svg>
+
+                <span id="origin" class="node"
+                    style="display: flex; justify-content: center; align-items: center; left: calc(2500px - 20px); top: 250px;">
+                    <img src="images/MUP/drill.svg" style="width: 40px; aspect-ratio: 1/1; object-fit: contain;">
+                </span> -->
+
+                <canvas class="moneyTreeCanvas"></canvas>
+
+                <div class="tooltip" style="top: 1px; left: 1px;">
+                    <h2>Iron Drill</h2>
+                    <h3>Unlocks iron drills</h3>
+                    <h4>Price: $5000</h4>
+                </div>
+            </div>
+
+            <div class="blast-furnace-zone">
+                <img src="/images/blast_furnace_darker.svg">
+
+                <div class="button-row">
+                    <div class="a"></div>
+                    <div class="b"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="/scripts/inventory.js"></script>
-
 
     <script src="/scripts/shop.js"></script>
     <script src="/scripts/main.js"></script>
     <script src="/scripts/tick.js"></script>
     <script src="/scripts/moneyUpgradeTree.js"></script>
+
+    <script src="/scripts/soundManager.js"></script>
 </body>
 
 </html>

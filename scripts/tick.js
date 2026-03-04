@@ -8,6 +8,7 @@ let timeBeforeTick = 0;
 
 let miningForTime = [0];
 
+
 function loop(currentTime) {
     const delta = currentTime - lastTime;
     lastTime = currentTime;
@@ -57,21 +58,29 @@ function tick(delta) {
         if (inventory.coal == undefined) coalAmount.innerHTML = 0;
 
         if (drill.miningTime >= mineTime) {
+            if (selectedTab == "drills") {
+                audios[0].volume = 0.25
+                audios[0].play()
+            }
+
             inventory[drill.type] = (inventory[drill.type] || 0) + 1;
             drill.miningTime = 0;
 
             if (drill.firstCase) {
                 switch (drill.type) {
                     case "iron":
-                        ironCard = coalCard.cloneNode(true)
-                        ironCard.classList.replace("coal-card", "iron-card")
-                        ironCard.children[0].innerHTML = "Iron"
-                        ironAmount = ironCard.getElementsByClassName("inv-amount")[0];
-                        ironCard.querySelector(".item-preview").src = "/images/inventory/iron.png"
+                        for (let i = 0; i < 10; i++) {
+                            ironCard = coalCard.cloneNode(true)
+                            ironCard.classList.replace("coal-card", "iron-card")
+                            ironCard.children[0].innerHTML = "Iron"
+                            ironAmount = ironCard.getElementsByClassName("inv-amount")[0];
+                            ironCard.querySelector(".item-preview").src = "/images/inventory/iron.png"
 
-                        document.querySelector(".inventory-zone").appendChild(ironCard)
-                        drill.firstCase = false;
-                        updateCards()
+                            document.querySelector(".inventory-zone").appendChild(ironCard)
+                            drill.firstCase = false;
+                            updateCards()
+                        }
+
                         break
                 }
             }
@@ -81,16 +90,15 @@ function tick(delta) {
         moneyDisplay.children[1].innerHTML = money
 
         if (moneyUpgradeTreeUnlocked) {
-            if (document.querySelector(".bottom-bar").style.gap != "15vw") {
-                if (document.querySelector(".money-upgrade-tree-button").style.display != "block") {
-                    document.querySelector(".bottom-bar").style.gap = "15vw";
-                    document.querySelector(".money-upgrade-tree-button").style.display = "block";
-                }
+
+            if (document.querySelector(".money-upgrade-tree-button").style.display != "block") {
+
+                document.querySelector(".money-upgrade-tree-button").style.display = "block";
             }
+
         }
         if (blastFurnaceUnlocked) {
-            if (document.querySelector(".bottom-bar").style.gap != "10vw") {
-                document.querySelector(".bottom-bar").style.gap = "10vw";
+            if (document.querySelector(".blast-furnace-button").style.display != "block") {
                 document.querySelector(".blast-furnace-button").style.display = "block";
             }
         }
