@@ -18,6 +18,8 @@ async function loadAudios() {
             console.error(err);
         }
     }
+    a(3)
 }
 
 loadAudios();
+

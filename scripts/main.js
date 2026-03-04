@@ -73,3 +73,5 @@ function resetAndReset(button) {
     document.querySelector(button).classList.add("selected")
     selectedTab = button.slice(1).split('-')[0]
 }
+
+a(0)

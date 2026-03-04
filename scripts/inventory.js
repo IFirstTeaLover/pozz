@@ -42,3 +42,5 @@ function sellAll(type, index) {
 }
 
 updateCards()
+
+a(1)

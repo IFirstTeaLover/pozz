@@ -57,3 +57,5 @@ function drillUpgrade(id, value, upg) {
         levelsDisplay.innerHTML = `Level: ${purchasedDrills[id].level}`;
     };
 }
+
+a(5)

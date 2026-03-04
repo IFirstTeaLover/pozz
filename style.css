@@ -6,6 +6,15 @@ body {
     display: flex;
     gap: 1vh;
     padding: 1vh;
+
+    user-select: none;
+    /* standard */
+    -webkit-user-select: none;
+    /* Safari/Chrome */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE/Edge */
 }
 
 .left-bar {
@@ -18,6 +27,7 @@ body {
     background: rgb(28, 25, 19);
     border: 4px solid rgb(21, 18, 14);
     border-radius: 20px 20px 0 20px;
+    overflow-y: scroll;
     z-index: 1000000;
 }
 
@@ -86,7 +96,7 @@ body {
     background: limegreen;
     border-radius: 8px;
     width: 0;
-    transition: width 0.03s ease;
+    transition: width 0.05s ease;
     box-shadow: 0 0 100px 2px limegreen;
 }
 
@@ -114,9 +124,6 @@ body {
     touch-action: none;
 }
 
-.money-upgrade-tree-zone.shown canvas {
-    display: block;
-}
 
 .inventory-zone.shown {
     display: grid;
@@ -146,17 +153,17 @@ body {
 }
 
 .inventory-card {
-    background: rgb(40, 40, 40);
+    background: rgb(44, 39, 30);
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
     gap: 0.4rem;
-    border-radius: 8px;
+    border-radius: 12px;
 
+    border: rgb(16, 14, 11) 2px solid;
     aspect-ratio: 1 / 1.25;
     width: 100%;
     box-sizing: border-box;
-    box-shadow: 0 0 5px 1px rgb(40, 40, 40);
 }
 
 .inventory-card img {
@@ -204,20 +211,20 @@ body {
     justify-content: center;
     padding: 0;
 
-    background: rgb(29, 29, 29);
+    background: rgb(32, 28, 22);
     color: white;
-    border: rgb(12, 12, 12) 2px solid;
+    border: rgb(11, 10, 7) 2px solid;
     border-radius: 4px;
     font-size: medium;
     cursor: pointer;
     font-family: "SN Pro";
     transition: background 0.2s ease, border 0.2s ease;
-    box-shadow: 0 0 10px 3px rgb(35, 35, 35);
+    box-shadow: 0 0 10px 3px rgb(43, 38, 30);
 }
 
 .inv-btn:hover {
-    background: rgb(35, 35, 35);
-    border: rgb(18, 18, 18) 2px solid;
+    background: rgb(36, 31, 25);
+    border: rgb(21, 19, 13) 2px solid;
 }
 
 ::-webkit-scrollbar {
@@ -267,8 +274,8 @@ h4 {
 .shop-upgrade {
     display: flex;
     align-items: center;
-    background: rgb(10, 10, 10);
-    border: rgb(5, 5, 5) 4px solid;
+    background: rgb(21, 19, 14);
+    border: rgb(15, 14, 10) 4px solid;
     border-radius: 15px;
     margin: 10px auto;
     width: calc(100% - 30px);
@@ -280,7 +287,7 @@ h4 {
 }
 
 
-.shop-zone{
+.shop-zone {
     height: 100%;
     overflow: scroll;
 }
@@ -380,13 +387,10 @@ h4 {
 .money-upgrade-tree-zone {
     padding: 0;
     margin: 0;
-
-}
-
-canvas {
-    width: 100%;
-    height: 99%;
-    display: none;
+    position: relative;
+    width: 5000px;
+    height: 5000px;
+    overflow: hidden;
 }
 
 #origin {
@@ -455,7 +459,7 @@ canvas {
 
 .game {
     flex: 1;
-
+    overflow: scroll;
     padding: 1vh 1vw;
     background: rgb(28, 25, 19);
     border: 4px solid rgb(21, 18, 14);

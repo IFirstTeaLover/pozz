@@ -5,12 +5,21 @@ let progressBar2 = null;
 
 let lastTime = performance.now();
 let timeBeforeTick = 0;
+let timeBeforeDomChange = 0;
+let delta
 
 let miningForTime = [0];
 
 
+const coalCard = document.getElementsByClassName("coal-card")[0];
+let ironCard;
+
+const coalAmount = coalCard.getElementsByClassName("inv-amount")[0];
+let ironAmount = null;
+
+
 function loop(currentTime) {
-    const delta = currentTime - lastTime;
+    delta = currentTime - lastTime;
     lastTime = currentTime;
 
     timeBeforeTick += delta;
@@ -23,14 +32,33 @@ function loop(currentTime) {
     requestAnimationFrame(loop);
 }
 
-requestAnimationFrame(loop);
+function domUpdate(currentTime) {
+    timeBeforeDomChange += delta
+
+    if (timeBeforeDomChange >= 50) {
+        updateDom()
+        timeBeforeDomChange = 0
+    }
+    requestAnimationFrame(domUpdate)
+}
+
+function startUp() {
+    requestAnimationFrame(loop);
+    requestAnimationFrame(domUpdate)
+}
 
 
-const coalCard = document.getElementsByClassName("coal-card")[0];
-let ironCard;
+function updateDom() {
+    progressBar.style.width = `${(purchasedDrills[0].miningTime) / ((5000 / purchasedDrills[0].level) / 100)}%`;
+    if (progressBar2 !== null) progressBar2.style.width = `${(purchasedDrills[1].miningTime) / ((5000 / (purchasedDrills[1].level / 2)) / 100)}%`;
 
-const coalAmount = coalCard.getElementsByClassName("inv-amount")[0];
-let ironAmount = null;
+    coalAmount.innerHTML = `${inventory.coal}x`;
+    if (ironAmount !== null) {
+        ironAmount.innerHTML = `${inventory.iron}x`
+    }
+
+    if (inventory.coal == undefined) coalAmount.innerHTML = 0;
+}
 
 function tick(delta) {
     purchasedDrills.forEach(drill => {
@@ -47,15 +75,7 @@ function tick(delta) {
 
         drill.miningTime += delta;
 
-        progressBar.style.width = `${(purchasedDrills[0].miningTime) / ((5000 / purchasedDrills[0].level) / 100)}%`;
-        if (progressBar2 !== null) progressBar2.style.width = `${(purchasedDrills[1].miningTime) / ((5000 / (purchasedDrills[1].level / 2)) / 100)}%`;
 
-        coalAmount.innerHTML = `${inventory.coal}x`;
-        if (ironAmount !== null) {
-            ironAmount.innerHTML = `${inventory.iron}x`
-        }
-
-        if (inventory.coal == undefined) coalAmount.innerHTML = 0;
 
         if (drill.miningTime >= mineTime) {
             if (selectedTab == "drills") {
@@ -69,18 +89,15 @@ function tick(delta) {
             if (drill.firstCase) {
                 switch (drill.type) {
                     case "iron":
-                        for (let i = 0; i < 10; i++) {
-                            ironCard = coalCard.cloneNode(true)
-                            ironCard.classList.replace("coal-card", "iron-card")
-                            ironCard.children[0].innerHTML = "Iron"
-                            ironAmount = ironCard.getElementsByClassName("inv-amount")[0];
-                            ironCard.querySelector(".item-preview").src = "/images/inventory/iron.png"
+                        ironCard = coalCard.cloneNode(true)
+                        ironCard.classList.replace("coal-card", "iron-card")
+                        ironCard.children[0].innerHTML = "Iron"
+                        ironAmount = ironCard.getElementsByClassName("inv-amount")[0];
+                        ironCard.querySelector(".item-preview").src = "/images/inventory/iron.png"
 
-                            document.querySelector(".inventory-zone").appendChild(ironCard)
-                            drill.firstCase = false;
-                            updateCards()
-                        }
-
+                        document.querySelector(".inventory-zone").appendChild(ironCard)
+                        drill.firstCase = false;
+                        updateCards()
                         break
                 }
             }
@@ -104,3 +121,5 @@ function tick(delta) {
         }
     })
 }
+
+a(2)
