@@ -48,7 +48,7 @@ function addNode(nodeID, x, y, parentId, iconSrc) {
     icon.style.aspectRatio = "1/1"
     icon.style.objectFit = "contain"
 
-    if (iconSrc == "/images/MUP/more_coal_value.png") icon.style.width = "60px"
+    if (iconSrc == "./images/MUP/more_coal_value.png") icon.style.width = "60px"
 
     span.appendChild(icon)
 
@@ -81,9 +81,9 @@ function updateConnection(id1, id2, lineId) {
     line.setAttribute('y2', (r2.top + r2.height / 2) - container.top);
 }
 
-const node1 = addNode(1, -1, 1, "origin", "/images/MUP/drill.svg");
-const node2 = addNode(2, 1, 1, "origin", "/images/MUP/more_coal_value.png");
-const node3 = addNode(3, -1, -1, "origin", "/images/blast_furnace.svg");
+const node1 = addNode(1, -1, 1, "origin", "./images/MUP/drill.svg");
+const node2 = addNode(2, 1, 1, "origin", "./images/MUP/more_coal_value.png");
+const node3 = addNode(3, -1, -1, "origin", "./images/blast_furnace.svg");
 
 
 const zone = document.querySelector('.money-upgrade-tree-zone');

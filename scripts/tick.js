@@ -93,7 +93,7 @@ function tick(delta) {
                         ironCard.classList.replace("coal-card", "iron-card")
                         ironCard.children[0].innerHTML = "Iron"
                         ironAmount = ironCard.getElementsByClassName("inv-amount")[0];
-                        ironCard.querySelector(".item-preview").src = "/images/inventory/iron.png"
+                        ironCard.querySelector(".item-preview").src = "./images/inventory/iron.png"
 
                         document.querySelector(".inventory-zone").appendChild(ironCard)
                         drill.firstCase = false;

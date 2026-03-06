@@ -41,10 +41,10 @@ function addButton(icon, name, clickAction, buttonClass) {
     document.querySelector(".left-bar").append(newButton)
 }
 
-addButton("/images/shop.svg", "Shop", () => shopFunc(".shop-button"), "shop-button")
-addButton("/images/backpack.svg", "Inventory", () => inventoryFunc(".inventory-button"), "inventory-button")
-addButton("/images/tree.svg", "Upgrade Tree", () => moneyUpgradeTreeFunc(".money-upgrade-tree-button"), "money-upgrade-tree-button")
-addButton("/images/blast_furnace.svg", "Furnace", () => blastFurnaceFunc(".furnace-button"), "furnace-button")
+addButton("./images/shop.svg", "Shop", () => shopFunc(".shop-button"), "shop-button")
+addButton("./images/backpack.svg", "Inventory", () => inventoryFunc(".inventory-button"), "inventory-button")
+addButton("./images/tree.svg", "Upgrade Tree", () => moneyUpgradeTreeFunc(".money-upgrade-tree-button"), "money-upgrade-tree-button")
+addButton("./images/blast_furnace.svg", "Furnace", () => blastFurnaceFunc(".furnace-button"), "furnace-button")
 
 function shopFunc(button) {
     resetAndReset(button)
