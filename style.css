@@ -129,7 +129,7 @@ body {
     display: grid;
 }
 
-.blast-furnace-zone.shown,
+.furnace-zone.shown,
 .drills-zone.shown {
     display: flex;
 }
@@ -346,7 +346,7 @@ h4 {
 }
 
 .money-upgrade-tree-button,
-.blast-furnace-button {
+.furnace-button {
     display: none;
 }
 
@@ -425,36 +425,76 @@ h4 {
     color: silver;
 }
 
-.blast-furnace-zone {
+.furnace-zone {
     display: none;
-    height: 80vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
-.blast-furnace-zone img {
+.furnace-zone img {
     height: 70%;
 }
 
-.button-row {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
 
-}
-
-.button-row div {
-    padding: 3vh 2vw;
-    border: 2px solid rgb(105, 105, 105);
+.furnace-zone div {
+    width: 5%;
+    aspect-ratio: 1/1;
+    border: 2px solid rgb(15, 14, 10);
     box-shadow: 0 0 3px 1px rgb(50, 50, 50);
-    background-color: rgb(41, 41, 41);
+    background-color: rgb(46, 41, 32);
     aspect-ratio: 1/1;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.furnace-zone div img {
+    opacity: 0.5;
+}
+
+.fuel-input {
+    position: absolute;
+    left: 30%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.raw-input {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.output {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.hover-info {
+    background-color: rgb(17, 15, 12);
+    padding: 10px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    position: fixed;
+    transform: scaleX(0);
+    transform-origin: left;
+    left: 120%;
+    white-space: nowrap;
+}
+
+.raw-input:hover .hover-info,
+.fuel-input:hover .hover-info,
+.output:hover .hover-info {
+    opacity: 1;
+    transform: scaleX(1);
 }
 
 .game {
@@ -464,5 +504,40 @@ h4 {
     background: rgb(28, 25, 19);
     border: 4px solid rgb(21, 18, 14);
     border-radius: 20px 20px 20px 0;
-    transition: flex 0.25s ease, width 0.25s ease, height 0.25s ease;
+    transition: flex 0.25s ease;
+}
+
+.inventory-overlay{
+    position: fixed;
+    width: 75%;
+    height: 75%;
+    z-index: 999999999999999; /* gorey */
+    background-color: rgb(69, 58, 44);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    overflow-y: scroll;
+    border-radius: 15px;
+    border: 4px solid rgb(55, 46, 35);
+    box-shadow: 0 2px 5px 4px rgb(32, 27, 20);
+    padding: 0.4rem;
+}
+
+.overlay-cards{
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    gap: 0.75rem;
+    height: 100%;
+    width: 100%;
+}
+
+.inventory-overlay h3{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1%;
+    background-color: rgb(55, 46, 35);
+    border-radius: 8px;
+    box-shadow: 0 0 5px 1px rgb(39, 33, 25);
 }

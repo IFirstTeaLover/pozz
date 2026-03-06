@@ -30,7 +30,7 @@ function updateCards() {
 function sellOne(type, index) {
     if (inventory[type] > 0) {
         inventory[type] -= 1;
-        money += prices[index]
+        money += prices[index];
     }
 }
 
@@ -42,5 +42,20 @@ function sellAll(type, index) {
 }
 
 updateCards()
+
+function openInventoryOverlay(){
+    const overlay = document.querySelector(".inventory-overlay")
+    const overlayCards = overlay.querySelector(".overlay-cards")
+    const inventory = document.querySelector(".inventory-zone")
+    overlayCards.innerHTML = inventory.innerHTML
+
+    const inventoryCards = Array.from(overlayCards.children)
+
+    inventoryCards.forEach(card=>{
+        const invActionsPath = Array.from(Array.from(card.children)[3].children)
+        invActionsPath[0].innerHTML = "Select"
+        invActionsPath[2].innerHTML = "Select Max"
+    })
+}
 
 a(1)

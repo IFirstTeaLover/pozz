@@ -44,7 +44,7 @@ function addButton(icon, name, clickAction, buttonClass) {
 addButton("/images/shop.svg", "Shop", () => shopFunc(".shop-button"), "shop-button")
 addButton("/images/backpack.svg", "Inventory", () => inventoryFunc(".inventory-button"), "inventory-button")
 addButton("/images/tree.svg", "Upgrade Tree", () => moneyUpgradeTreeFunc(".money-upgrade-tree-button"), "money-upgrade-tree-button")
-addButton("/images/blast_furnace.svg", "Blast Furnace", () => blastFurnaceFunc(".blast-furnace-button"), "blast-furnace-button")
+addButton("/images/blast_furnace.svg", "Furnace", () => blastFurnaceFunc(".furnace-button"), "furnace-button")
 
 function shopFunc(button) {
     resetAndReset(button)
@@ -63,7 +63,7 @@ function moneyUpgradeTreeFunc(button) {
 
 function blastFurnaceFunc(button) {
     resetAndReset(button)
-    document.querySelector(".blast-furnace-zone").classList.add("shown")
+    document.querySelector(".furnace-zone").classList.add("shown")
 }
 
 function resetAndReset(button) {

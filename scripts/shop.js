@@ -21,10 +21,15 @@ function buyUpgrade(upg) {
     }
 }
 
-function addUpgrade(icon, header, info, price, _class) {
+function addUpgrade(iconPath, header, info, price, _class) {
     const newUpgrade = shopDiv.children[0].cloneNode(true)
 
-    newUpgrade.querySelector(".upgrade-icon").src = icon
+    if (imagesDownloaded[iconPath]) {
+        newUpgrade.querySelector(".upgrade-icon").src = imagesDownloaded[iconPath]; 
+        console.log("Using cached blob for " + iconPath);
+    } else {
+        newUpgrade.querySelector(".upgrade-icon").src = iconPath;
+    }
     newUpgrade.querySelector(".upgrade-header-text").innerHTML = header
     newUpgrade.querySelector(".upgrade-bottom-text").innerHTML = info
     newUpgrade.querySelector(".upgrade-amount-text").innerHTML = "Level: 1"

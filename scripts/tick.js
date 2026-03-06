@@ -115,8 +115,8 @@ function tick(delta) {
 
         }
         if (blastFurnaceUnlocked) {
-            if (document.querySelector(".blast-furnace-button").style.display != "block") {
-                document.querySelector(".blast-furnace-button").style.display = "block";
+            if (document.querySelector(".furnace-button").style.display != "block") {
+                document.querySelector(".furnace-button").style.display = "block";
             }
         }
     })

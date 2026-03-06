@@ -4,6 +4,12 @@ let sounds = [
     "notification.mp3"
 ]
 
+let images = [
+    "inventory/iron.png"
+]
+
+let imagesDownloaded = {}
+
 let audios = []
 
 async function loadAudios() {
@@ -16,6 +22,29 @@ async function loadAudios() {
             audios.push(audio);
         } catch (err) {
             console.error(err);
+        }
+    }
+    loadImages()
+}
+
+async function loadImages() {
+    for (let imagePath of images) {
+        try {
+            const res = await fetch(`/images/${imagePath}`);
+            if (!res.ok) throw new Error("Failed to fetch " + imagePath);
+            const img = new Image();
+
+            const blob = await res.blob();
+            const objectURL = URL.createObjectURL(blob);
+
+            img.src = objectURL;
+
+            await new Promise(resolve => img.onload = resolve);
+
+            imagesDownloaded[imagePath] = objectURL;
+            console.log("Loaded:", imagePath);
+        } catch (err) {
+            console.warn(err);
         }
     }
     a(3)

@@ -169,7 +169,7 @@ function buyTreeUpgrade(id, purchaser) {
                 purchasedDrills.push({
                     type: "iron", level: 1, miningTime: 0, upgradePrice: 1000, firstCase: true
                 })
-                addUpgrade("/images/inventory/iron.png", "Higher iron drill speed", "Increases iron drill speed (5000 divided by (level/2))", "1000", "iron-drill-speed")
+                addUpgrade("inventory/iron.png", "Higher iron drill speed", "Increases iron drill speed (5000 divided by (level/2))", "1000", "iron-drill-speed")
                 const newBar = document.querySelector(".progress-bar").cloneNode(true)
                 progressBar2 = newBar.querySelector(".progress-fill")
                 document.querySelector(".drills-zone").append(newBar)
