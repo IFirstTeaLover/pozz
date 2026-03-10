@@ -10,7 +10,11 @@ let delta
 
 let miningForTime = [0];
 
-
+let cards = Array.from(document.querySelector(".inventory-zone").children)
+let cardsAmounts = []
+cards.forEach(card => {
+    cardsAmounts.push(card.querySelector(".inv-amount"))
+})
 const coalCard = document.getElementsByClassName("coal-card")[0];
 let ironCard;
 
@@ -32,7 +36,7 @@ function loop(currentTime) {
     requestAnimationFrame(loop);
 }
 
-function domUpdate(currentTime) {
+function domUpdate() {
     timeBeforeDomChange += delta
 
     if (timeBeforeDomChange >= 50) {
@@ -52,12 +56,20 @@ function updateDom() {
     progressBar.style.width = `${(purchasedDrills[0].miningTime) / ((5000 / purchasedDrills[0].level) / 100)}%`;
     if (progressBar2 !== null) progressBar2.style.width = `${(purchasedDrills[1].miningTime) / ((5000 / (purchasedDrills[1].level / 2)) / 100)}%`;
 
-    coalAmount.innerHTML = `${inventory.coal}x`;
-    if (ironAmount !== null) {
-        ironAmount.innerHTML = `${inventory.iron}x`
-    }
+    cardsAmounts.forEach(card => {
+        const type = Array.from(card.parentElement.classList)
+            .find(c => c.endsWith("-card") && c !== "inventory-card")
+            .replace("-card", "")
+        card.innerHTML = inventory[type] + "x"
+    })
+}
 
-    if (inventory.coal == undefined) coalAmount.innerHTML = 0;
+function updateInventoryCards() {
+    cards = Array.from(document.querySelector(".inventory-zone").children)
+    cardsAmounts = []
+    cards.forEach(card => {
+        cardsAmounts.push(card.querySelector(".inv-amount"))
+    })
 }
 
 function tick(delta) {
@@ -80,7 +92,9 @@ function tick(delta) {
         if (drill.miningTime >= mineTime) {
             if (selectedTab == "drills") {
                 audios[0].volume = 0.25
-                audios[0].play()
+                audios[0].play().catch(e => {
+                    console.warn("Failed to play sound:", e);
+                });
             }
 
             inventory[drill.type] = (inventory[drill.type] || 0) + 1;
@@ -89,15 +103,8 @@ function tick(delta) {
             if (drill.firstCase) {
                 switch (drill.type) {
                     case "iron":
-                        ironCard = coalCard.cloneNode(true)
-                        ironCard.classList.replace("coal-card", "iron-card")
-                        ironCard.children[0].innerHTML = "Iron"
-                        ironAmount = ironCard.getElementsByClassName("inv-amount")[0];
-                        ironCard.querySelector(".item-preview").src = "./images/inventory/iron.png"
-
-                        document.querySelector(".inventory-zone").appendChild(ironCard)
+                        newInventoryCard("iron-card", "Raw Iron", "./images/inventory/raw_iron.png")
                         drill.firstCase = false;
-                        updateCards()
                         break
                 }
             }
@@ -120,6 +127,18 @@ function tick(delta) {
             }
         }
     })
+}
+
+function newInventoryCard(className, name, image) {
+    card = coalCard.cloneNode(true)
+    card.classList.replace("coal-card", className)
+    card.children[0].innerHTML = name
+    ironAmount = card.querySelector(".inv-amount");
+    card.querySelector(".item-preview").src = image
+
+    document.querySelector(".inventory-zone").appendChild(card)
+    updateCards()
+    updateInventoryCards()
 }
 
 a(2)
