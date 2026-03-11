@@ -12,3 +12,4 @@ rawInput.addEventListener("click", ()=>{
     openInventoryOverlay(furnace, "raw")
 })
 
+a(6)

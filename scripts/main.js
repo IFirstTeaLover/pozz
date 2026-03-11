@@ -41,10 +41,21 @@ function addButton(icon, name, clickAction, buttonClass) {
     document.querySelector(".left-bar").append(newButton)
 }
 
-addButton("./images/shop.svg", "Shop", () => shopFunc(".shop-button"), "shop-button")
-addButton("./images/backpack.svg", "Inventory", () => inventoryFunc(".inventory-button"), "inventory-button")
-addButton("./images/tree.svg", "Upgrade Tree", () => moneyUpgradeTreeFunc(".money-upgrade-tree-button"), "money-upgrade-tree-button")
-addButton("./images/blast_furnace.svg", "Furnace", () => blastFurnaceFunc(".furnace-button"), "furnace-button")
+function translate(string){
+    return window.GameLanguage.t(string)
+}
+
+async function localize() {
+    await GameLanguage.init();
+
+    addButton("./images/shop.svg", translate('buttons.shop'), () => shopFunc(".shop-button"), "shop-button")
+    addButton("./images/backpack.svg", translate('buttons.inventory'), () => inventoryFunc(".inventory-button"), "inventory-button")
+    addButton("./images/tree.svg", translate('buttons.mup'), () => moneyUpgradeTreeFunc(".money-upgrade-tree-button"), "money-upgrade-tree-button")
+    addButton("./images/blast_furnace.svg", translate('buttons.furnace'), () => blastFurnaceFunc(".furnace-button"), "furnace-button")
+}
+
+localize()
+
 
 function shopFunc(button) {
     resetAndReset(button)

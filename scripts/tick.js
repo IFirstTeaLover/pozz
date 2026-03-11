@@ -16,10 +16,6 @@ cards.forEach(card => {
     cardsAmounts.push(card.querySelector(".inv-amount"))
 })
 const coalCard = document.getElementsByClassName("coal-card")[0];
-let ironCard;
-
-const coalAmount = coalCard.getElementsByClassName("inv-amount")[0];
-let ironAmount = null;
 
 
 function loop(currentTime) {

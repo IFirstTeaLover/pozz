@@ -1,6 +1,5 @@
 const shopDiv = document.querySelector(".shop-zone");
 
-
 function buyUpgrade(upg) {
     switch (upg.classList[1]) {
         case "coal-drill-speed":

@@ -1,4 +1,4 @@
-let l = new Array(6).fill(false)
+let l = new Array(8).fill(false)
 let t = 0
 let z = false;
 
@@ -12,5 +12,5 @@ setInterval(() => {
             z = true
             startUp()
         }
-    } else { t += .100 }
+    } else { t += .500 }
 }, 500)

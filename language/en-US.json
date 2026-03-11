@@ -1,0 +1,39 @@
+{
+    "buttons": {
+        "drills": "Drills",
+        "shop": "Shop",
+        "inventory": "Inventory",
+        "mup": "Upgrade Tree",
+        "furnace": "Furnace"
+    },
+    "shopUpgrades": {
+        "higherCoalDrillSpeed": {
+            "header": "Higher coal drill speed",
+            "mainInfo": "Increases coal drill speed (5000 divided by level)"
+        },
+        "upgradeTreeUnlock": {
+            "header": "Unlock money upgrade tree",
+            "mainInfo": "Unlocks money upgrade tree"
+        },
+        "higherIronDrillSpeed": {
+            "header": "Higher iron drill speed",
+            "mainInfo": "Increases iron drill speed (5000 divided by (level/2))"
+        }
+    },
+
+    "etc": {
+        "sell": "Sell",
+        "sellall": "Sell all",
+        "level": "Level"
+    },
+    "inventory": {
+        "coal": "Coal",
+        "raw_iron": "Raw iron",
+        "iron": "Iron ingot"
+    },
+    "furnace": {
+        "rawInput": "Input raw iron here",
+        "fuelInput": "Input fuel here",
+        "output": "Output will be here"
+    }
+}
