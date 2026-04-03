@@ -1,5 +1,5 @@
 let inventory = {
-    coal: 0,
+    coal: 10,
     iron: 0,
     steel: 0
 }
@@ -69,6 +69,10 @@ function openInventoryOverlay(executor, slot) {
         invActionsPath[0].addEventListener("click", () => {
             overlay.style.transform = transDef + "0)"
         })
+
+        invActionsPath[2].addEventListener("click", () => {
+            overlay.style.transform = transDef + "0)"
+        })
     })
 
     overlay.style.transform = transDef + "1)"
@@ -123,9 +127,23 @@ function retrieveFromInventory(amount, executor, type, slot) {
     inventory[type] -= amount
     switch (slot) {
         case "raw":
-            executor.raw[type] += amount
+            if (Object.values(executor.raw).every(v => v === 0)) {
+                executor.raw[type] += executor.raw[type] + amount;
+            }else{
+                Game.Notification(notification.generic.occupied.slot);
+            }
+            break;
+
+        case "fuel":
+            if (Object.values(executor.fuel).every(v => v === 0)) {
+                executor.fuel[type] = executor.fuel[type] + amount;
+            }else{
+                Game.Notification(notification.generic.occupied.slot);
+            }
             break;
     }
 }
 
 a(1)
+
+//note: minimal desktop webapp size is 1035!!

@@ -35,7 +35,7 @@ function loop(currentTime) {
 function domUpdate() {
     timeBeforeDomChange += delta
 
-    if (timeBeforeDomChange >= 50) {
+    if (timeBeforeDomChange >= 20) {
         updateDom()
         timeBeforeDomChange = 0
     }
@@ -117,7 +117,8 @@ function tick(delta) {
             }
 
         }
-        if (blastFurnaceUnlocked) {
+        if (furnaceUnlocked) {
+            checkFurnace()
             if (document.querySelector(".furnace-button").style.display != "block") {
                 document.querySelector(".furnace-button").style.display = "block";
             }

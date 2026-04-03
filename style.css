@@ -1,6 +1,35 @@
+:root {
+    --body-bg: rgb(30, 29, 25);
+
+    --tiles-bg: rgb(28, 25, 19);
+    --tiles-border: rgb(21, 18, 14);
+
+    --button-bg: rgb(42, 37, 28);
+    --button-border: rgb(22, 20, 15);
+    --button-shadow: rgb(50, 44, 34);
+    --button-top-bg: rgb(56, 49, 35);
+
+    --progressbar-bg: #232120;
+    --progressbar-border-shadow: rgb(60, 53, 41);
+    --progressbar-color: limegreen;
+
+    --inv-card-bg: rgb(44, 39, 30);
+    --inv-card-border: rgb(16, 14, 11);
+
+    --inv-btn-bg: rgb(32, 28, 22);
+    --inv-btn-border: rgb(11, 10, 7);
+    --inv-btn-shadow: rgb(43, 38, 30);
+
+    --inv-btn-hover-bg: rgb(36, 31, 25);
+    --inv-btn-hover-border: rgb(21, 19, 13);
+
+    --currencies-display-bg: rgb(26, 23, 18);
+    --currencies-display-border: rgb(16, 14, 11);
+}
+
 body {
     margin: 0;
-    background: rgb(30, 29, 25);
+    background: var(--body-bg);
     height: 100vh;
     box-sizing: border-box;
     display: flex;
@@ -20,8 +49,8 @@ body {
     gap: 0.7vw;
     transition: flex 0.25s ease, width 0.25s ease, height 0.25s ease;
     padding: 0.5vw;
-    background: rgb(28, 25, 19);
-    border: 4px solid rgb(21, 18, 14);
+    background: var(--tiles-bg);
+    border: 4px solid var(--tiles-border);
     border-radius: 20px 20px 0 20px;
     overflow-y: scroll;
     z-index: 10;
@@ -33,8 +62,8 @@ body {
     width: 100%;
     min-height: 5%;
     max-height: 12%;
-    background: rgb(42, 37, 28);
-    border: 4px solid rgb(22, 20, 15);
+    background: var(--button-bg);
+    border: 4px solid var(--button-border);
     border-radius: 15px;
 
     transition: transform 0.15s ease, background 0.25s ease, border 0.25s ease;
@@ -58,7 +87,7 @@ body {
 .l-bar-button:active .button-top-layer,
 .l-bar-button.selected .button-top-layer {
     transform: translateY(0);
-    box-shadow: inset 0 8px 0px -2px rgb(48, 42, 32);
+    box-shadow: inset 0 8px 0px -2px var(--button-shadow);
 }
 
 .button-top-layer {
@@ -70,7 +99,7 @@ body {
     width: 100%;
     height: 100%;
 
-    background: rgb(56, 49, 35);
+    background: var(--button-top-bg);
     border-radius: 10px;
 
     transform: translateY(-6px);
@@ -80,20 +109,20 @@ body {
 .progress-bar {
     height: 5vh;
     aspect-ratio: 10/1;
-    background: #222;
+    background: var(--progressbar-bg);
     border-radius: 12px;
     overflow: hidden;
-    border: 3px rgb(60, 53, 41) solid;
-    box-shadow: 0 0 5px 1px rgb(60, 53, 41);
+    border: 3px var(--progressbar-border-shadow) solid;
+    box-shadow: 0 0 5px 1px var(--progressbar-border-shadow);
 }
 
 .progress-fill {
     height: 100%;
-    background: limegreen;
+    background: var(--progressbar-color);
     border-radius: 8px;
     width: 0;
     transition: width 0.05s ease;
-    box-shadow: 0 0 100px 2px limegreen;
+    box-shadow: 0 0 100px 2px var(--progressbar-color);
 }
 
 .zone {
@@ -149,14 +178,14 @@ body {
 }
 
 .inventory-card {
-    background: rgb(44, 39, 30);
+    background: var(--inv-card-bg);
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
     gap: 0.4rem;
     border-radius: 12px;
 
-    border: rgb(16, 14, 11) 2px solid;
+    border: var(--inv-card-border) 2px solid;
     aspect-ratio: 1 / 1.25;
     width: 100%;
     box-sizing: border-box;
@@ -207,20 +236,20 @@ body {
     justify-content: center;
     padding: 0;
 
-    background: rgb(32, 28, 22);
+    background: var(--inv-btn-bg);
     color: white;
-    border: rgb(11, 10, 7) 2px solid;
+    border: var(--inv-btn-border) 2px solid;
     border-radius: 4px;
     font-size: medium;
     cursor: pointer;
     font-family: "SN Pro";
     transition: background 0.2s ease, border 0.2s ease;
-    box-shadow: 0 0 10px 3px rgb(43, 38, 30);
+    box-shadow: 0 0 10px 3px var(--inv-btn-shadow);
 }
 
 .inv-btn:hover {
-    background: rgb(36, 31, 25);
-    border: rgb(21, 19, 13) 2px solid;
+    background: var(--inv-btn-hover-bg);
+    border: var(--inv-btn-hover-border) 2px solid;
 }
 
 ::-webkit-scrollbar {
@@ -231,8 +260,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(26, 23, 18);
-    border: rgb(16, 14, 11) 4px solid;
+    background: var(--currencies-display-bg);
+    border: var(--currencies-display-border) 4px solid;
     border-radius: 15px;
 
     height: 8vh;
@@ -243,10 +272,12 @@ p,
 h3,
 h2,
 h1,
-h4 {
+h4,
+h5 {
     color: white;
     font-family: "SN Pro";
     vertical-align: middle;
+    margin: 0;
 }
 
 
@@ -500,17 +531,18 @@ h4 {
     flex: 1;
     overflow: scroll;
     padding: 1vh 1vw;
-    background: rgb(28, 25, 19);
-    border: 4px solid rgb(21, 18, 14);
+    background: var(--tiles-bg);
+    border: 4px solid var(--tiles-border);
     border-radius: 20px 20px 20px 0;
     transition: flex 0.25s ease;
 }
 
-.inventory-overlay{
+.inventory-overlay {
     position: fixed;
     width: 75%;
     height: 75%;
-    z-index: 15; /* gorey */
+    z-index: 15;
+    /* gorey */
     background-color: rgb(69, 58, 44);
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
@@ -524,7 +556,7 @@ h4 {
     transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.overlay-cards{
+.overlay-cards {
     overflow-y: scroll;
     display: grid;
     grid-template-columns: repeat(2, minmax(100px, 1fr));
@@ -533,7 +565,7 @@ h4 {
     width: 100%;
 }
 
-.inventory-overlay h3{
+.inventory-overlay h3 {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -543,7 +575,7 @@ h4 {
     box-shadow: 0 0 5px 1px rgb(39, 33, 25);
 }
 
-.inventory-overlay-close{
+.inventory-overlay-close {
     position: absolute;
     right: 2%;
     top: 2%;
@@ -559,19 +591,19 @@ h4 {
     transition: background-color 0.25s ease, border 0.25s ease;
 }
 
-.inventory-overlay-close:hover{
+.inventory-overlay-close:hover {
     background-color: rgb(66, 56, 43);
     border: 3px solid rgb(47, 41, 30);
 }
 
-.console{
+.console {
     width: 75vw;
     height: 75vh;
     position: fixed;
     z-index: 16;
     background-color: black;
 
-    user-select:text;
+    user-select: text;
     -webkit-user-select: text;
     -moz-user-select: text;
     -ms-user-select: text;
@@ -582,4 +614,60 @@ h4 {
     padding: 1%;
     display: none;
     overflow-y: scroll;
+}
+
+.notification {
+    position: relative;
+    transform: translateX(calc(100% + 2vh + 6px));
+    right: 0;
+    width: 20vw;
+    height: calc(10vh - 20px);
+    background-color: rgb(20, 18, 13);
+    border: rgb(43, 38, 30) 3px solid;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    transition: cubic-bezier(0.25, 0.10, 0.00, 1.03) 0.5s transform;
+}
+
+.notification.notified {
+    transform: translateX(0%);
+}
+
+.notification div {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification div h4,
+.notification div h2 {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+}
+
+.notification img {
+    height: 100%;
+}
+
+.notification-stack {
+    position: fixed;
+    right: calc(8vh + 2px);
+    bottom: 2vh;
+    width: 20vw;
+    display: flex;
+    flex-direction: column-reverse;
+    grid-template-rows: 0fr;
+    gap: 1vh;
+}
+
+.notification.removing {
+    max-height: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.2s ease;
 }

@@ -1,7 +1,7 @@
 let purchasedDrills = [{ type: "coal", level: 1, miningTime: 0, upgradePrice: 100, firstCase: false }];
 let money = 100000;
 let moneyUpgradeTreeUnlocked = true;
-let blastFurnaceUnlocked = true;
+let furnaceUnlocked = true;
 let selectedTab = "drills"
 
 let templateButton = document.querySelector(".drills-button")
