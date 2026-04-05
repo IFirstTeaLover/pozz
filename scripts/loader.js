@@ -8,9 +8,13 @@ setInterval(() => {
     if (l.every(status => status === true)) {
         if (!z) {
             console.success("FINISHED LOADING!")
-            document.querySelector(".load-screen").remove()
+
             z = true
             startUp()
+            document.querySelector(".load-screen").classList.add("done")
+            setTimeout(() => {
+                document.querySelector(".load-screen").remove()
+            }, 200);
         }
     } else { t += .500 }
 }, 500)

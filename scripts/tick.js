@@ -87,10 +87,12 @@ function tick(delta) {
 
         if (drill.miningTime >= mineTime) {
             if (selectedTab == "drills") {
-                audios[0].volume = 0.25
-                audios[0].play().catch(e => {
-                    console.warn("Failed to play sound:", e);
-                });
+                if (enableSFX) {
+                    audios[0].volume = 0.25
+                    audios[0].play().catch(e => {
+                        console.warn("Failed to play sound:", e);
+                    });
+                }
             }
 
             inventory[drill.type] = (inventory[drill.type] || 0) + 1;

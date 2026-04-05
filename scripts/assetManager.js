@@ -4,13 +4,23 @@ let sounds = [
     "notification.mp3"
 ]
 
+let musics = [
+    "Casa Bossa Nova.mp3",
+    "Crinoline Dreams.mp3",
+    "Ether Vox.mp3",
+    "Late Night Radio.mp3"
+]
+
 let images = [
     "inventory/iron.png"
 ]
 
 let imagesDownloaded = {}
 
+let musicStarted = false;
+
 let audios = []
+let tracks = []
 
 async function loadAudios() {
     for (let sound of sounds) {
@@ -24,7 +34,24 @@ async function loadAudios() {
             console.error(err);
         }
     }
+
+    for (let music of musics) {
+        try {
+            const res = await fetch(`./audio/music/${music}`);
+            if (!res.ok) throw new Error("Failed to fetch " + music);
+            const blob = await res.blob();
+            const audio = new Audio(URL.createObjectURL(blob));
+            tracks.push(audio);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     loadImages()
+    document.addEventListener("click", () => {
+        randomMusicLoop(tracks);
+    })
+
 }
 
 async function loadImages() {
@@ -50,5 +77,27 @@ async function loadImages() {
     a(3)
 }
 
+function randomMusicLoop(tracks) {
+    if (musicStarted) return;
+    musicStarted = true;
+    let remaining = [];
+
+    function pickNext() {
+        if (remaining.length === 0) {
+            remaining = [...tracks];
+            for (let i = remaining.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
+            }
+        }
+        const audio = remaining.pop();
+        audio.currentTime = 0;
+        audio.play();
+        audio.volume = 0.5;
+        audio.onended = pickNext;
+    }
+
+    pickNext();
+}
 loadAudios();
 

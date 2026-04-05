@@ -12,7 +12,7 @@ origin.addEventListener("pointermove", e => {
 });
 
 origin.addEventListener("pointerleave", () => {
-    tooltip.style.display = "none"
+    hideInfo()
 });
 
 origin.addEventListener("click", () => buyTreeUpgrade(0, origin))
@@ -33,7 +33,7 @@ function addNode(nodeID, x, y, parentId, iconSrc) {
     });
 
     span.addEventListener("pointerleave", () => {
-        tooltip.style.display = "none"
+        hideInfo()
     });
 
     span.addEventListener("click", () => {
@@ -138,10 +138,23 @@ document.addEventListener("pointerup", () => {
     document.removeEventListener("pointermove", onMouseMove);
 });
 
+let hideTimeout = null
+let showFrame = null
+
 function showInfo(x, y, id) {
+    if (hideTimeout) {
+        clearTimeout(hideTimeout)
+        hideTimeout = null
+    }
+    
+
     tooltip.style.display = "block"
     tooltip.style.left = x + 15 + "px"
     tooltip.style.top = y + 15 + "px"
+    
+    showFrame = requestAnimationFrame(() => {
+        tooltip.classList.add("shown")
+    })
 
     const text = tooltip.children
 
@@ -156,6 +169,19 @@ function showInfo(x, y, id) {
     } catch (e) { text[2].innerHTML = "Unknown" }
 
 
+}
+
+function hideInfo() {
+    if (showFrame) {
+        cancelAnimationFrame(showFrame)
+        showFrame = null
+    }
+
+    tooltip.classList.remove("shown")
+    hideTimeout = setTimeout(() => {
+        tooltip.style.display = "none"
+        hideTimeout = null
+    }, 200)
 }
 
 function buyTreeUpgrade(id, purchaser) {
@@ -203,151 +229,3 @@ function buyTreeUpgrade(id, purchaser) {
 }
 
 a(4)
-// let width
-// let height
-
-// const canvas = document.querySelector(".moneyTreeCanvas")
-// const ctx = canvas.getContext("2d")
-
-// resize()
-
-// const infos = [
-//     { header: "Iron Drill", mainInfo: "Unlocks iron drill", price: 5000, max: 1, purchased: false },
-//     { header: "Copper Drill", mainInfo: "Unlocks copper drill", price: 50000, max: 1, purchased: false },
-//     { header: "Better coal", mainInfo: "Makes coal more valuable (+10/lvl)", price: 10000, max: 10, purchased: false, level: 0, },
-//     { header: "Unlock Blast Furnace", mainInfo: "Unlocks blast furnace to make alloys", price: 7500, max: 1, purchased: false },
-// ]
-
-// const nodes = [
-//     { id: "origin", x: 0, y: 0, parent: "canvas", icon: "/images/MUP/drill.svg" },
-//     { id: 1, x: -1, y: 1, parent: "origin", icon: "/images/MUP/drill.svg" },
-//     { id: 2, x: 1, y: 1, parent: "origin", icon: "/images/MUP/more_coal_value.png" },
-//     { id: 3, x: -1, y: -1, parent: "origin", icon: "/images/blast_furnace.svg" }
-// ]
-
-// const nodeMap = {};
-// nodes.forEach(node => {
-//     nodeMap[node.id] = node;
-// });
-
-// const imageCache = {};
-
-// function preloadImages(nodes) {
-//     const uniquePaths = [...new Set(nodes.map(n => n.icon))];
-
-//     const promises = uniquePaths.map(path => {
-//         return new Promise((resolve, reject) => {
-//             const img = new Image();
-//             img.src = path;
-//             img.onload = () => {
-//                 imageCache[path] = img;
-//                 resolve(img);
-//             };
-//             img.onerror = () => reject(`Failed to load: ${path}`);
-//         });
-//     });
-
-//     return Promise.all(promises);
-// }
-
-// function treeRenderer() {
-//     nodes.forEach((node) => {
-//         //Connections
-//         if (node.parent && nodeMap[node.parent]) {
-//             const parent = nodeMap[node.parent];
-
-//             ctx.beginPath();
-//             ctx.moveTo(parent.x * 150 + width / 2, -parent.y * 150 + height / 2);
-//             ctx.lineTo(node.x * 150 + width / 2, -node.y * 150 + height / 2);
-
-//             ctx.strokeStyle = "#0f0d0a";
-//             ctx.lineWidth = 4;
-//             ctx.stroke();
-//             ctx.closePath();
-//         }
-//     });
-
-//     nodes.forEach((node) => {
-//         //Circles
-//         ctx.beginPath();
-//         ctx.arc(node.x * 150 + width / 2, -node.y * 150 + height / 2, 40, 0, 2 * Math.PI, false);
-//         ctx.fillStyle = "#332d23";
-//         ctx.strokeStyle = "#0f0d0a";
-//         ctx.lineWidth = 6;
-//         ctx.stroke();
-//         ctx.fill();
-//         ctx.closePath();
-//     });
-
-//     nodes.forEach((node) => {
-//         //Icons
-//         const screenX = node.x * 150 + width / 2;
-//         const screenY = -node.y * 150 + height / 2;
-//         const img = imageCache[node.icon];
-//         const iconSize = 40;
-//         ctx.drawImage(
-//             img,
-//             screenX - iconSize / 2,
-//             screenY - iconSize / 2,
-//             iconSize,
-//             iconSize
-//         );
-//     });
-
-//     requestAnimationFrame(treeRenderer)
-// }
-
-// canvas.addEventListener("click", (e) => {
-//   const rect = canvas.getBoundingClientRect();
-  
-//   // Calculate coordinates relative to the canvas
-//   const x = e.clientX - rect.left;
-//   const y = e.clientY - rect.top;
-
-//   clickDetection(x, y);
-// });
-
-// function clickDetection(x, y) {
-//     console.log(x, y)
-//     nodes.forEach(node => {
-//         const rx = node.x * 150 + width / 2
-//         const ry = -node.y * 150 + width / 2
-//         const size = 40
-//         console.log("Checking " + node.x)
-//         ctx.beginPath()
-//         ctx.fillStyle = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
-//         ctx.rect(node.x * 150 + width / 2, -node.y * 150 + height / 2, 40, 40)
-//         ctx.rect(x-20, y-20,20,20)
-//         ctx.fill()
-//         if (
-//             x >= rx &&
-//             x <= rx + size &&
-//             y >= ry &&
-//             y <= ry + size
-//         ) {
-//             console.log("clicked", node)
-//         }
-//     })
-
-// }
-
-
-// preloadImages(nodes).then(() => {
-//     requestAnimationFrame(treeRenderer);
-// }).catch(err => console.error(err));
-
-// function resize() {
-//     const gameBox = document.querySelector(".game").getBoundingClientRect();
-
-//     width = gameBox.width
-//     height = gameBox.height
-
-//     const dpr = window.devicePixelRatio || 1;
-
-//     canvas.width = width * dpr;
-//     canvas.height = height * dpr;
-
-//     ctx.scale(dpr, dpr);
-// }
-
-// window.addEventListener("resize", resize)

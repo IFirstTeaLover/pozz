@@ -17,8 +17,8 @@
 
 <body>
     <div class="load-screen">
-        <h3 class="load-text">Loading, Please wait</h3>
         <div class="spinner"></div>
+        <h3 class="load-text">Loading, Please wait</h3>
     </div>
 
     <div class="left-bar">
@@ -29,10 +29,20 @@
             </div>
         </div>
 
-        <button class="drills-button l-bar-button selected">
+        <div class="l-bar-scroll">
+            <button class="drills-button l-bar-button selected">
+                <div class="button-top-layer">
+                    <img src="./images/MUP/drill.svg">
+                    <h4>Drills</h4>
+                </div>
+            </button>
+        </div>
+
+
+        <button class="settings-button l-bar-button">
             <div class="button-top-layer">
-                <img src="./images/MUP/drill.svg">
-                <h4>Drills</h4>
+                <img src="./images/settings.svg">
+                <h4>Settings</h4>
             </div>
         </button>
     </div>
@@ -126,6 +136,20 @@
                     </h3>
                 </div>
             </div>
+
+            <div class="settings-zone">
+                <p>Settings</p>
+
+                <div class="sfx">
+                    <h3>Enable SFX</h3> <button class="sfx-checkmark"><img src="./images/check.svg"></button>
+                </div>
+
+                <div class="music">
+                    <h3>Enable Music</h3> <button class="music-checkmark"><img src="./images/check.svg"></button>
+                </div>
+
+                <button class="credits">Credits</button>
+            </div>
         </div>
     </div>
 
@@ -151,6 +175,13 @@
         </div>
     </div>
 
+    <div class="credits-popup">
+        <h3>Credits:</h3>
+        <h4>CREDITS TEXT</h4>
+
+        <button class="credits-close">X</button>
+    </div>
+
 
     <script src="./scripts/loader.js" class="loader"></script>
 
@@ -166,6 +197,7 @@
     <script src="./scripts/tick.js"></script>
     <script src="./scripts/moneyUpgradeTree.js"></script>
     <script src="./scripts/furnace.js"></script>
+    <script src="./scripts/settings.js"></script>
 
     <script src="./scripts/assetManager.js"></script>
 </body>

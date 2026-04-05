@@ -16,10 +16,19 @@
 .load-screen{
     z-index: 999999999999;
     position: fixed;
-    width: calc(100vw - 2vh);
-    height: 98vh;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
     background-color: rgb(16, 15, 15);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    transition: opacity 0.2s ease, scale 0.2s ease;
+}
+
+.load-screen.done{
+    opacity: 0;
+    scale: 2;
 }

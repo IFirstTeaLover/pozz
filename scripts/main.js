@@ -12,6 +12,11 @@ templateButton.addEventListener("click", () => {
     document.querySelector(".drills-zone").classList.add("shown")
 })
 
+document.querySelector(".settings-button").addEventListener("click", () => {
+    resetAndReset(".settings-button")
+    document.querySelector(".settings-zone").classList.add("shown")
+})
+
 function hideAllTabs() {
     const zonesDiv = document.getElementsByClassName("zones")[0];
     const zones = Array.from(zonesDiv.children);
@@ -22,23 +27,25 @@ function hideAllTabs() {
 }
 
 function resetButtons() {
-    let buttonsDiv = document.querySelector(".left-bar")
+    let buttonsDiv = document.querySelector(".l-bar-scroll")
     let buttons = Array.from(buttonsDiv.children)
     buttons.forEach(button => {
         button.classList.remove("selected")
     })
+    document.querySelector(".settings-button").classList.remove("selected")
 }
 
 function addButton(icon, name, clickAction, buttonClass) {
     let newButton = templateButton.cloneNode(true)
     let buttonDiv = newButton.children[0]
+    const settingsBtn = document.querySelector('.settings-button');
     newButton.classList.replace("drills-button", buttonClass)
     newButton.classList.remove("selected")
     buttonDiv.children[0].src = icon
     buttonDiv.children[1].innerHTML = name
 
     newButton.addEventListener("click", clickAction)
-    document.querySelector(".left-bar").append(newButton)
+    document.querySelector(".l-bar-scroll").append(newButton);
 }
 
 function translate(string){
@@ -78,11 +85,15 @@ function blastFurnaceFunc(button) {
 }
 
 function resetAndReset(button) {
-    audios[1].play()
+    if (enableSFX) audios[1].play()
     hideAllTabs()
     resetButtons()
     document.querySelector(button).classList.add("selected")
     selectedTab = button.slice(1).split('-')[0]
+}
+
+function showPopup(popupClass, header, hasOptions, mainText){
+
 }
 
 a(0)
