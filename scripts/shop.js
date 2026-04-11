@@ -31,7 +31,7 @@ function addUpgrade(iconPath, header, info, price, _class) {
     }
     newUpgrade.querySelector(".upgrade-header-text").innerHTML = header
     newUpgrade.querySelector(".upgrade-bottom-text").innerHTML = info
-    newUpgrade.querySelector(".upgrade-amount-text").innerHTML = "Level: 1"
+    newUpgrade.querySelector(".upgrade-amount-text").innerHTML = Game.translate("etc.level") + ": 1"
     newUpgrade.querySelector(".upgrade-price").innerHTML = "$" + price
     newUpgrade.classList.replace("coal-drill-speed", _class)
     shopDiv.append(newUpgrade)
@@ -58,7 +58,7 @@ function drillUpgrade(id, value, upg) {
         money -= purchasedDrills[id].upgradePrice;
         purchasedDrills[id].upgradePrice = purchasedDrills[id].upgradePrice + value;
         priceDisplay.innerHTML = `$${purchasedDrills[id].upgradePrice}`;
-        levelsDisplay.innerHTML = `Level: ${purchasedDrills[id].level}`;
+        levelsDisplay.innerHTML = Game.translate("etc.level") + ": " + purchasedDrills[id].level;
     };
 }
 

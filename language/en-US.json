@@ -4,7 +4,8 @@
         "shop": "Shop",
         "inventory": "Inventory",
         "mup": "Upgrade Tree",
-        "furnace": "Furnace"
+        "furnace": "Furnace",
+        "settings": "Settings"
     },
     "shopUpgrades": {
         "higherCoalDrillSpeed": {
@@ -24,7 +25,11 @@
     "etc": {
         "sell": "Sell",
         "sellall": "Sell all",
-        "level": "Level"
+        "level": "Level",
+        "loading": "Loading, please wait!",
+        "selectItem": "Select an item:",
+        "select": "Select",
+        "selectAll": "Select All"
     },
     "inventory": {
         "coal": "Coal",
@@ -35,5 +40,32 @@
         "rawInput": "Input raw iron here",
         "fuelInput": "Input fuel here",
         "output": "Output will be here"
+    },
+    "mup": {
+        "ironDrill": {
+            "header": "Iron drill",
+            "mainInfo": "Unlocks drill for iron"
+        },
+
+        "copperDrill": {
+            "header": "Copper drill",
+            "mainInfo": "Unlocks drill for copper"
+        },
+
+        "betterCoal" : {
+            "header": "Better coal",
+            "mainInfo": "Coal becomes more expensive (+10/level)"
+        },
+
+        "furnace": {
+            "header": "Unlocks furnace",
+            "mainInfo": "Unlocks furnace for smelting ingots"
+        }
+    },
+    "settings": {
+        "sounds": "Sounds",
+        "sfx": "Enable SFX",
+        "music": "Enable Music",
+        "credits": "Credits"
     }
 }

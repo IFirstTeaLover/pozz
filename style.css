@@ -387,11 +387,6 @@ h5 {
     font-size: clamp(2cqh, 2cqw, 2cqw);
 }
 
-.money-upgrade-tree-button,
-.furnace-button {
-    display: none;
-}
-
 .node {
     position: absolute;
     text-align: center;
@@ -768,12 +763,6 @@ h5 {
 
 .checkmark.enabled::after {
     opacity: 1;
-}
-
-.sfx button img,
-.music button img {
-    height: 1em;
-    aspect-ratio: 1/1;
 }
 
 .credits {

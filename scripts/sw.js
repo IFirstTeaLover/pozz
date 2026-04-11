@@ -10,4 +10,5 @@ if ("serviceWorker" in navigator) {
 } else {
     console.error("Service workers are not supported.");
     console.error("Update your browser!")
+    console.error("Have latest version of chromium/firefox? report an issue: https://www.github.com/ifirsttealover/pozz/issues")
 }

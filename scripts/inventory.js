@@ -63,8 +63,8 @@ function openInventoryOverlay(executor, slot, inventoryType) {
 
     inventoryCards.forEach(card => {
         const invActionsPath = Array.from(Array.from(card.children)[3].children)
-        invActionsPath[0].innerHTML = "Select"
-        invActionsPath[2].innerHTML = "Select Max"
+        invActionsPath[0].innerHTML = Game.translate("etc.select")
+        invActionsPath[2].innerHTML = Game.translate("etc.selectAll")
 
         invActionsPath[0].addEventListener("click", () => {
             overlay.style.transform = transDef + "0)"
@@ -158,6 +158,18 @@ function retrieveFromInventory(amount, executor, type, slot, inventoryType) {
             }
 
     }
+}
+
+function newInventoryCard(className, name, image) {
+    card = coalCard.cloneNode(true)
+    card.classList.replace("coal-card", className)
+    card.children[0].innerHTML = Game.translate(name)
+    ironAmount = card.querySelector(".inv-amount");
+    card.querySelector(".item-preview").src = image
+
+    document.querySelector(".inventory-zone").appendChild(card)
+    updateCards()
+    updateInventoryCards()
 }
 
 a(1)

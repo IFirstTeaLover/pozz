@@ -1,12 +1,20 @@
 const tooltip = document.querySelector(".tooltip");
 const origin = document.getElementById("origin");
 let tooltipPos = {x: 0, y: 0};
+
 const infos = [
-    { header: "Iron Drill", mainInfo: "Unlocks iron drill", price: 5000, max: 1, purchased: false },
-    { header: "Copper Drill", mainInfo: "Unlocks copper drill", price: 50000, max: 1, purchased: false },
-    { header: "Better coal", mainInfo: "Makes coal more valuable (+10/lvl)", price: 10000, max: 10, purchased: false, level: 0, },
-    { header: "Unlock Furnace", mainInfo: "Unlocks furnace to make ingots", price: 7500, max: 1, purchased: false },
+    { header: Game.translate("mup.ironDrill.header"), mainInfo: Game.translate("mup.ironDrill.mainInfo")},
+    { header: Game.translate("mup.copperDrill.header"), mainInfo: Game.translate("mup.copperDrill.mainInfo")},
+    { header: Game.translate("mup.betterCoal.header"), mainInfo: Game.translate("mup.betterCoal.mainInfo")},
+    { header: Game.translate("mup.furnace.header"), mainInfo: Game.translate("mup.furnace.mainInfo")},
 ];
+
+const upgrades = [
+    {price: 5000, max: 1, purchased: false},
+    {price: 50000, max: 1, purchased: false},
+    {price: 10000, max: 10, purchased: false, level: 0},
+    {price: 7500, max: 1, purchased: false}
+]
 
 origin.addEventListener("pointermove", e => {
     showInfo(e.clientX, e.clientY, 0)
@@ -162,8 +170,8 @@ function showInfo(x, y, id) {
     text[0].innerHTML = infos[id]?.header || "Failed to find tooltip header!"
     text[1].innerHTML = infos[id]?.mainInfo || "Please try reloading"
     try {
-        if (infos[id].purchased == false) {
-            text[2].innerHTML = "$" + infos[id]?.price
+        if (upgrades[id].purchased == false) {
+            text[2].innerHTML = "$" + upgrades[id]?.price
         } else {
             text[2].innerHTML = "Purchased"
         }
@@ -187,22 +195,22 @@ function hideInfo() {
 }
 
 function buyTreeUpgrade(id, purchaser) {
-    if (infos[id].purchased) return
-    const enoughMoney = money >= infos[id].price
-    const isMax = infos[id].max >= infos[id].level
-    if (enoughMoney) money -= infos[id].price
+    if (upgrades[id].purchased) return
+    const enoughMoney = money >= upgrades[id].price
+    const isMax = upgrades[id].max >= upgrades[id].level
+    if (enoughMoney) money -= upgrades[id].price
     switch (id) {
         case 0:
             if (enoughMoney) {
                 purchasedDrills.push({
                     type: "iron", level: 1, miningTime: 0, upgradePrice: 1000, firstCase: true
                 })
-                addUpgrade("inventory/iron.png", window.GameLanguage.t("shopUpgrades.higherIronDrillSpeed") , "Increases iron drill speed (5000 divided by (level/2))", "1000", "iron-drill-speed")
+                addUpgrade("inventory/iron.png", Game.translate("shopUpgrades.higherIronDrillSpeed.header") , Game.translate("shopUpgrades.higherIronDrillSpeed.mainInfo"), "1000", "iron-drill-speed")
                 const newBar = document.querySelector(".progress-bar").cloneNode(true)
                 progressBar2 = newBar.querySelector(".progress-fill")
                 document.querySelector(".drills-zone").append(newBar)
                 purchaser.classList.add("purchased")
-                infos[id].purchased = true
+                upgrades[id].purchased = true
                 break;
             }
 
@@ -210,11 +218,11 @@ function buyTreeUpgrade(id, purchaser) {
             if (enoughMoney) {
                 if (isMax) {
                     prices[0] += 10
-                    infos[2].level = infos[2].level + 1
-                    infos[2].price = infos[2].price + 2500
+                    upgrades[2].level = upgrades[2].level + 1
+                    upgrades[2].price = upgrades[2].price + 2500
                     showInfo(tooltipPos.x, tooltipPos.y, id)
                 } else {
-                    infos[id].purchased = true
+                    upgrades[id].purchased = true
                     purchaser.classList.add("purchased")
                 }
                 updateCards()
@@ -223,7 +231,7 @@ function buyTreeUpgrade(id, purchaser) {
 
         case 3:
             if (enoughMoney) {
-                infos[id].purchased = true;
+                upgrades[id].purchased = true;
                 purchaser.classList.add("purchased");
                 furnaceUnlocked = true;
                 break;

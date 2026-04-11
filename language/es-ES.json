@@ -1,0 +1,67 @@
+{
+    "buttons": {
+        "drills": "Taladros",
+        "shop": "Tienda",
+        "inventory": "Inventario",
+        "mup": "Árbol de mejoras",
+        "furnace": "Horno",
+        "settings": "Ajustes"
+    },
+    "shopUpgrades": {
+        "higherCoalDrillSpeed": {
+            "header": "Velocidad de taladro (Carbón)",
+            "mainInfo": "Aumenta la velocidad del taladro de carbón (5000 dividido por nivel)"
+        },
+        "upgradeTreeUnlock": {
+            "header": "Desbloquear árbol de mejoras",
+            "mainInfo": "Desbloquea el árbol de mejoras de dinero"
+        },
+        "higherIronDrillSpeed": {
+            "header": "Velocidad de taladro (Hierro)",
+            "mainInfo": "Aumenta la velocidad del taladro de hierro (5000 dividido por (nivel/2))"
+        }
+    },
+    "etc": {
+        "sell": "Vender",
+        "sellall": "Vender todo",
+        "level": "Nivel",
+        "loading": "¡Cargando, por favor espera!",
+        "selectItem": "Selecciona un objeto:",
+        "select": "Seleccionar",
+        "selectAll": "Seleccionar todo"
+    },
+    "inventory": {
+        "coal": "Carbón",
+        "raw_iron": "Hierro bruto",
+        "iron": "Lingote de hierro"
+    },
+    "furnace": {
+        "rawInput": "Introduce hierro bruto aquí",
+        "fuelInput": "Introduce combustible aquí",
+        "output": "El resultado aparecerá aquí"
+    },
+    "mup": {
+        "ironDrill": {
+            "header": "Taladro de hierro",
+            "mainInfo": "Desbloquea el taladro para hierro"
+        },
+        "copperDrill": {
+            "header": "Taladro de cobre",
+            "mainInfo": "Desbloquea el taladro para cobre"
+        },
+        "betterCoal": {
+            "header": "Mejor carbón",
+            "mainInfo": "El carbón se vuelve más caro (+10/nivel)"
+        },
+        "furnace": {
+            "header": "Desbloquear horno",
+            "mainInfo": "Desbloquea el horno para fundir lingotes"
+        }
+    },
+    "settings": {
+        "sounds": "Sonidos",
+        "sfx": "Activar SFX",
+        "music": "Activar música",
+        "credits": "Créditos"
+    }
+}

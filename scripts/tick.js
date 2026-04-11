@@ -8,6 +8,9 @@ let timeBeforeTick = 0;
 let timeBeforeDomChange = 0;
 let delta
 
+let mupShown = false;
+let furnaceShown = false; 
+
 let miningForTime = [0];
 
 let cards = Array.from(document.querySelector(".inventory-zone").children)
@@ -53,6 +56,24 @@ function updateDom() {
             .replace("-card", "")
         card.innerHTML = inventory[type] + "x"
     })
+
+    const moneyDisplay = document.querySelector(".money-display")
+    moneyDisplay.querySelector("p").innerHTML = money
+
+    if (moneyUpgradeTreeUnlocked) {
+
+        if (!mupShown) {
+            addButton("./images/tree.svg", Game.translate('buttons.mup'), () => moneyUpgradeTreeFunc(".money-upgrade-tree-button"), "money-upgrade-tree-button")
+            mupShown = true;
+        }
+
+    }
+    if (furnaceUnlocked) {
+        if (!furnaceShown) {
+            addButton("./images/furnace.svg", translate('buttons.furnace'), () => furnaceFunc(".furnace-button"), "furnace-button")
+            furnaceShown = true
+        }
+    }
 }
 
 function updateInventoryCards() {
@@ -85,7 +106,7 @@ function tick(delta) {
                 if (enableSFX) {
                     let pop = audios[0].cloneNode(true);
                     pop.volume = 0.25
-                    pop.onended = ()=>{
+                    pop.onended = () => {
                         pop.remove();
                     }
                     pop.play().catch(e => {
@@ -100,43 +121,15 @@ function tick(delta) {
             if (drill.firstCase) {
                 switch (drill.type) {
                     case "iron":
-                        newInventoryCard("iron-card", "Raw Iron", "./images/inventory/raw_iron.png")
+                        newInventoryCard("iron-card", "inventory.iron", "./images/inventory/raw_iron.png")
                         drill.firstCase = false;
                         break
                 }
             }
         }
-
-        const moneyDisplay = document.getElementsByClassName("money-display")[0];
-        moneyDisplay.children[1].innerHTML = money
-
-        if (moneyUpgradeTreeUnlocked) {
-
-            if (document.querySelector(".money-upgrade-tree-button").style.display != "block") {
-
-                document.querySelector(".money-upgrade-tree-button").style.display = "block";
-            }
-
-        }
-        if (furnaceUnlocked) {
-            checkFurnace()
-            if (document.querySelector(".furnace-button").style.display != "block") {
-                document.querySelector(".furnace-button").style.display = "block";
-            }
-        }
     })
 }
 
-function newInventoryCard(className, name, image) {
-    card = coalCard.cloneNode(true)
-    card.classList.replace("coal-card", className)
-    card.children[0].innerHTML = name
-    ironAmount = card.querySelector(".inv-amount");
-    card.querySelector(".item-preview").src = image
 
-    document.querySelector(".inventory-zone").appendChild(card)
-    updateCards()
-    updateInventoryCards()
-}
 
 a(2)
