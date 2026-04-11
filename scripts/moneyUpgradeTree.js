@@ -1,11 +1,12 @@
-const tooltip = document.querySelector(".tooltip")
-const origin = document.getElementById("origin")
+const tooltip = document.querySelector(".tooltip");
+const origin = document.getElementById("origin");
+let tooltipPos = {x: 0, y: 0};
 const infos = [
     { header: "Iron Drill", mainInfo: "Unlocks iron drill", price: 5000, max: 1, purchased: false },
     { header: "Copper Drill", mainInfo: "Unlocks copper drill", price: 50000, max: 1, purchased: false },
     { header: "Better coal", mainInfo: "Makes coal more valuable (+10/lvl)", price: 10000, max: 10, purchased: false, level: 0, },
-    { header: "Unlock Blast Furnace", mainInfo: "Unlocks blast furnace to make alloys", price: 7500, max: 1, purchased: false },
-]
+    { header: "Unlock Furnace", mainInfo: "Unlocks furnace to make ingots", price: 7500, max: 1, purchased: false },
+];
 
 origin.addEventListener("pointermove", e => {
     showInfo(e.clientX, e.clientY, 0)
@@ -83,7 +84,7 @@ function updateConnection(id1, id2, lineId) {
 
 const node1 = addNode(1, -1, 1, "origin", "./images/MUP/drill.svg");
 const node2 = addNode(2, 1, 1, "origin", "./images/MUP/more_coal_value.png");
-const node3 = addNode(3, -1, -1, "origin", "./images/blast_furnace.svg");
+const node3 = addNode(3, -1, -1, "origin", "./images/furnace.svg");
 
 
 const zone = document.querySelector('.money-upgrade-tree-zone');
@@ -167,7 +168,8 @@ function showInfo(x, y, id) {
             text[2].innerHTML = "Purchased"
         }
     } catch (e) { text[2].innerHTML = "Unknown" }
-
+    tooltipPos.x = x;
+    tooltipPos.y = y;
 
 }
 
@@ -210,6 +212,7 @@ function buyTreeUpgrade(id, purchaser) {
                     prices[0] += 10
                     infos[2].level = infos[2].level + 1
                     infos[2].price = infos[2].price + 2500
+                    showInfo(tooltipPos.x, tooltipPos.y, id)
                 } else {
                     infos[id].purchased = true
                     purchaser.classList.add("purchased")
@@ -222,7 +225,7 @@ function buyTreeUpgrade(id, purchaser) {
             if (enoughMoney) {
                 infos[id].purchased = true;
                 purchaser.classList.add("purchased");
-                blastFurnaceUnlocked = true;
+                furnaceUnlocked = true;
                 break;
             }
     }

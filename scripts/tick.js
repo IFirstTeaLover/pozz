@@ -23,28 +23,23 @@ function loop(currentTime) {
     lastTime = currentTime;
 
     timeBeforeTick += delta;
+    timeBeforeDomChange += delta;
 
     if (timeBeforeTick >= TICK_TIME) {
         tick(TICK_TIME);
         timeBeforeTick -= TICK_TIME;
     }
 
-    requestAnimationFrame(loop);
-}
-
-function domUpdate() {
-    timeBeforeDomChange += delta
-
-    if (timeBeforeDomChange >= 20) {
+    if (timeBeforeDomChange >= 100) {
         updateDom()
         timeBeforeDomChange = 0
     }
-    requestAnimationFrame(domUpdate)
+
+    requestAnimationFrame(loop);
 }
 
 function startUp() {
     requestAnimationFrame(loop);
-    requestAnimationFrame(domUpdate)
 }
 
 
@@ -88,8 +83,12 @@ function tick(delta) {
         if (drill.miningTime >= mineTime) {
             if (selectedTab == "drills") {
                 if (enableSFX) {
-                    audios[0].volume = 0.25
-                    audios[0].play().catch(e => {
+                    let pop = audios[0].cloneNode(true);
+                    pop.volume = 0.25
+                    pop.onended = ()=>{
+                        pop.remove();
+                    }
+                    pop.play().catch(e => {
                         console.warn("Failed to play sound:", e);
                     });
                 }

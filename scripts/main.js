@@ -58,7 +58,7 @@ async function localize() {
     addButton("./images/shop.svg", translate('buttons.shop'), () => shopFunc(".shop-button"), "shop-button")
     addButton("./images/backpack.svg", translate('buttons.inventory'), () => inventoryFunc(".inventory-button"), "inventory-button")
     addButton("./images/tree.svg", translate('buttons.mup'), () => moneyUpgradeTreeFunc(".money-upgrade-tree-button"), "money-upgrade-tree-button")
-    addButton("./images/blast_furnace.svg", translate('buttons.furnace'), () => blastFurnaceFunc(".furnace-button"), "furnace-button")
+    addButton("./images/furnace.svg", translate('buttons.furnace'), () => furnaceFunc(".furnace-button"), "furnace-button")
 }
 
 localize()
@@ -79,7 +79,7 @@ function moneyUpgradeTreeFunc(button) {
     document.querySelector(".money-upgrade-tree-zone").classList.add("shown")
 }
 
-function blastFurnaceFunc(button) {
+function furnaceFunc(button) {
     resetAndReset(button)
     document.querySelector(".furnace-zone").classList.add("shown")
 }

@@ -9,24 +9,24 @@ let enableSFX = localStorage.getItem("sfxEnabled") === "true";
 let enableMusic = localStorage.getItem("musicEnabled") === "true";
 
 if (enableSFX) {
-    sfxCheckmark.querySelector("img").style.display = "block"
+    sfxCheckmark.classList.add("enabled")
 } else {
-    sfxCheckmark.querySelector("img").style.display = "none"
+    sfxCheckmark.classList.remove("enabled")
 }
 
 if (enableMusic) {
-    musicCheckmark.querySelector("img").style.display = "block"
+    musicCheckmark.classList.add("enabled")
 } else {
-    musicCheckmark.querySelector("img").style.display = "none"
+    musicCheckmark.classList.remove("enabled")
 }
 
 sfxCheckmark.addEventListener("click", () => {
     enableSFX = !enableSFX;
     localStorage.setItem("sfxEnabled", enableSFX)
     if (enableSFX) {
-        sfxCheckmark.querySelector("img").style.display = "block"
+        sfxCheckmark.classList.add("enabled")
     } else {
-        sfxCheckmark.querySelector("img").style.display = "none"
+        sfxCheckmark.classList.remove("enabled")
     }
 })
 
@@ -34,9 +34,9 @@ musicCheckmark.addEventListener("click", () => {
     enableMusic = !enableMusic;
     localStorage.setItem("musicEnabled", enableMusic)
     if (enableMusic) {
-        musicCheckmark.querySelector("img").style.display = "block"
+        musicCheckmark.classList.add("enabled")
     } else {
-        musicCheckmark.querySelector("img").style.display = "none"
+        musicCheckmark.classList.remove("enabled")
     }
 })
 
@@ -47,7 +47,7 @@ creditsButton.addEventListener("click", () => {
 function showCredits() {
     const creditsPopup = document.querySelector(".credits-popup");
     let creditsText
-    fetch("/CREDITS")
+    fetch("./CREDITS")
         .then(response => response.text())
         .then(data => {
             creditsText = data;

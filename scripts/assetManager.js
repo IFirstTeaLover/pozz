@@ -77,6 +77,9 @@ async function loadImages() {
     a(3)
 }
 
+let fadeInterval
+let audio
+
 function randomMusicLoop(tracks) {
     if (musicStarted) return;
     musicStarted = true;
@@ -90,14 +93,47 @@ function randomMusicLoop(tracks) {
                 [remaining[i], remaining[j]] = [remaining[j], remaining[i]];
             }
         }
-        const audio = remaining.pop();
+        audio = remaining.pop();
         audio.currentTime = 0;
         audio.play();
-        audio.volume = 0.5;
+        audio.volume = enableMusic ? 0.5 : 0;
         audio.onended = pickNext;
     }
 
     pickNext();
 }
+
+document.addEventListener('visibilitychange', () => {
+    if (!audio) return;
+
+    if (document.hidden) {
+        startFade();
+    } else {
+        stopFade();
+        if (enableMusic) audio.volume = 0.5;
+    }
+});
+
+function startFade() {
+    if (fadeInterval) clearInterval(fadeInterval);
+    if (!audio) return;
+
+    const stepTime = 200;
+    const steps = 10000 / stepTime;
+    const volumeStep = audio.volume / steps;
+
+    fadeInterval = setInterval(() => {
+        if (audio.volume > 0) {
+            audio.volume = Math.max(0, audio.volume - volumeStep);
+        } else {
+            clearInterval(fadeInterval);
+        }
+    }, stepTime);
+}
+
+function stopFade() {
+    if (fadeInterval) clearInterval(fadeInterval);
+}
+
 loadAudios();
 

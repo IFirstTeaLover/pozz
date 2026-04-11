@@ -1,6 +1,6 @@
 let inventory = {
     coal: 10,
-    iron: 0,
+    iron: 10,
     steel: 0
 }
 
@@ -12,7 +12,7 @@ let types = {
 const closeButton = document.querySelector(".inventory-overlay-close");
 const overlay = document.querySelector(".inventory-overlay")
 
-let prices = [20, 100];
+let prices = [20, 40, 200];
 
 function updateCards() {
     let cards = Array.from(document.getElementsByClassName("inventory-zone")[0].children)
@@ -53,7 +53,7 @@ function sellAll(type, index) {
 
 updateCards()
 
-function openInventoryOverlay(executor, slot) {
+function openInventoryOverlay(executor, slot, inventoryType) {
     const overlayCards = overlay.querySelector(".overlay-cards")
     const inventory = document.querySelector(".inventory-zone")
     overlayCards.innerHTML = inventory.innerHTML
@@ -92,21 +92,21 @@ function openInventoryOverlay(executor, slot) {
         if (btnOne._listener) btnOne.removeEventListener("click", btnOne._listener, slot);
         if (btnAll._listener) btnAll.removeEventListener("click", btnAll._listener, slot);
 
-        btnOne._listener = () => selectOne(type, executor, slot);
-        btnAll._listener = () => selectAll(type, executor, slot);
+        btnOne._listener = () => selectOne(type, executor, slot, inventoryType);
+        btnAll._listener = () => selectAll(type, executor, slot, inventoryType);
 
         btnOne.addEventListener("click", btnOne._listener);
         btnAll.addEventListener("click", btnAll._listener);
     });
 }
 
-function selectOne(type, executor, slot) {
+function selectOne(type, executor, slot, inventoryType) {
     if (inventory[type] > 0) {
-        retrieveFromInventory(1, executor, type, slot)
+        retrieveFromInventory(1, executor, type, slot, inventoryType)
     }
 }
 
-function selectAll(type, executor, slot) {
+function selectAll(type, executor, slot, inventoryType) {
     let amount
     if (inventory[type] > 0) {
         if (inventory[type] > 100) {
@@ -115,7 +115,7 @@ function selectAll(type, executor, slot) {
             amount = inventory[type]
         }
     }
-    retrieveFromInventory(amount, executor, type, slot)
+    retrieveFromInventory(amount, executor, type, slot, inventoryType)
 }
 
 closeButton.addEventListener("click", () => {
@@ -123,24 +123,40 @@ closeButton.addEventListener("click", () => {
     overlay.querySelector(".overlay-cards").innerHTML = "";
 })
 
-function retrieveFromInventory(amount, executor, type, slot) {
-    inventory[type] -= amount
-    switch (slot) {
-        case "raw":
-            if (Object.values(executor.raw).every(v => v === 0)) {
-                executor.raw[type] += executor.raw[type] + amount;
-            }else{
-                Game.Notification(notification.generic.occupied.slot);
-            }
-            break;
+function retrieveFromInventory(amount, executor, type, slot, inventoryType) {
+    switch (inventoryType) {
+        case "furnace":
 
-        case "fuel":
-            if (Object.values(executor.fuel).every(v => v === 0)) {
-                executor.fuel[type] = executor.fuel[type] + amount;
-            }else{
-                Game.Notification(notification.generic.occupied.slot);
+            switch (slot) {
+                case "raw":
+
+                    if (Object.values(executor.raw).every(v => v === 0)) {
+                        if (executor.raw[type] !== null) {
+                            executor.raw[type] += executor.raw[type] + amount;
+                            inventory[type] -= amount
+                        }
+                    } else {
+                        Game.Notification(notification.generic.occupied.slot);
+                    }
+
+                    checkFurnace()
+                    break;
+
+                case "fuel":
+
+                    if (Object.values(executor.fuel).every(v => v === 0)) {
+                        if (furnace.fuel["coal"] !== null) {
+                            executor.fuel[type] += executor.fuel[type] + amount;
+                            inventory[type] -= amount
+                        }
+                    } else {
+                        Game.Notification(notification.generic.occupied.slot);
+                    }
+
+                    checkFurnace()
+                    break;
             }
-            break;
+
     }
 }
 

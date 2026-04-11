@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idle</title>
+    <title>Pozz – In-Browser Idle Game</title>
     <link rel="stylesheet" href="loader.css">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap"
         rel="stylesheet">
 
-    <link rel="icon" href="./images/blast_furnace.svg">
+    <link rel="icon" href="./images/furnace.svg">
 </head>
 
 <body>
@@ -113,7 +113,7 @@
             <div class="furnace-zone">
 
 
-                <img src="./images/blast_furnace_darker.svg">
+                <img src="./images/furnace_darker.svg">
 
                 <div class="raw-input">
 
@@ -138,14 +138,26 @@
             </div>
 
             <div class="settings-zone">
-                <p>Settings</p>
+                <div class="settings">
+                    <div class="settings-section">
+                        <p>PLACEHOLDER TEXT</p>
 
-                <div class="sfx">
-                    <h3>Enable SFX</h3> <button class="sfx-checkmark"><img src="./images/check.svg"></button>
-                </div>
+                        <div class="setting-wrapper">
+                            <h3>Enable something</h3> <button class="checkmark"></button>
+                        </div>
+                    </div>
 
-                <div class="music">
-                    <h3>Enable Music</h3> <button class="music-checkmark"><img src="./images/check.svg"></button>
+                    <div class="settings-section">
+                        <p>Sounds</p>
+
+                        <div class="sfx setting-wrapper">
+                            <h3>Enable SFX</h3> <button class="sfx-checkmark checkmark"></button>
+                        </div>
+
+                        <div class="music setting-wrapper">
+                            <h3>Enable Music</h3> <button class="music-checkmark checkmark"></button>
+                        </div>
+                    </div>
                 </div>
 
                 <button class="credits">Credits</button>
@@ -198,6 +210,8 @@
     <script src="./scripts/moneyUpgradeTree.js"></script>
     <script src="./scripts/furnace.js"></script>
     <script src="./scripts/settings.js"></script>
+    <script src="./scripts/sw.js"></script>
+    <script src="./scripts/Crafting.js"></script>
 
     <script src="./scripts/assetManager.js"></script>
 </body>
