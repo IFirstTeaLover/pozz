@@ -56,13 +56,11 @@ class Game {
         sf["drills"] = purchasedDrills
         sf["inventory"] = inventory;
         sf["furnaceSlots"] = furnace;
+        sf["mupUpgrades"] = upgrades;
 
         sf = btoa(JSON.stringify(sf));
 
-        sf = sf.split("").reverse().join("") + "POzZSAVE";
-
-        sf = btoa(sf);
-        saveFile = btoa(sf);
+        saveFile = sf;
 
         console.log(saveFile)
     }

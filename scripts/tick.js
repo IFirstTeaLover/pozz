@@ -8,8 +8,10 @@ let timeBeforeTick = 0;
 let timeBeforeDomChange = 0;
 let delta
 
+const moneyDisplay = document.querySelector(".money-display")
+
 let mupShown = false;
-let furnaceShown = false; 
+let furnaceShown = false;
 
 let miningForTime = [0];
 
@@ -47,26 +49,32 @@ function startUp() {
 
 
 function updateDom() {
-    progressBar.style.width = `${(purchasedDrills[0].miningTime) / ((5000 / purchasedDrills[0].level) / 100)}%`;
-    if (progressBar2 !== null) progressBar2.style.width = `${(purchasedDrills[1].miningTime) / ((5000 / (purchasedDrills[1].level / 2)) / 100)}%`;
+    if (document.hidden) return
+    if (selectedTab == "drills") {
+        progressBar.style.width = `${(purchasedDrills[0].miningTime) / ((5000 / purchasedDrills[0].level) / 100)}%`;
+        if (progressBar2 !== null) progressBar2.style.width = `${(purchasedDrills[1].miningTime) / ((5000 / (purchasedDrills[1].level / 2)) / 100)}%`;
+    }
 
-    cardsAmounts.forEach(card => {
-        const type = Array.from(card.parentElement.classList)
-            .find(c => c.endsWith("-card") && c !== "inventory-card")
-            .replace("-card", "")
-        card.innerHTML = inventory[type] + "x"
-    })
+    if (selectedTab == "inventory") {
+        try {
+            cardsAmounts.forEach(card => {
+                const type = Array.from(card.parentElement.classList)
+                    .find(c => c.endsWith("-card") && c !== "inventory-card")
+                    .replace("-card", "")
+                card.textContent = inventory[type] + "x"
+            })
+        } catch (e) {
+            console.error(e)
+        }
+    }
 
-    const moneyDisplay = document.querySelector(".money-display")
-    moneyDisplay.querySelector("p").innerHTML = money
+    moneyDisplay.querySelector("p").textContent = money
 
     if (moneyUpgradeTreeUnlocked) {
-
         if (!mupShown) {
             addButton("./images/tree.svg", Game.translate('buttons.mup'), () => moneyUpgradeTreeFunc(".money-upgrade-tree-button"), "money-upgrade-tree-button")
             mupShown = true;
         }
-
     }
     if (furnaceUnlocked) {
         if (!furnaceShown) {

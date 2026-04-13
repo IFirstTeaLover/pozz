@@ -138,13 +138,13 @@ document.addEventListener("pointerdown", (event) => {
     lastX = event.clientX;
     lastY = event.clientY;
 
-    document.addEventListener("pointermove", onMouseMove);
+    document.querySelector(".money-upgrade-tree-zone").addEventListener("pointermove", onMouseMove);
 
 });
 
 document.addEventListener("pointerup", () => {
     isDragging = false;
-    document.removeEventListener("pointermove", onMouseMove);
+    document.querySelector(".money-upgrade-tree-zone").removeEventListener("pointermove", onMouseMove);
 });
 
 let hideTimeout = null
