@@ -17,7 +17,13 @@
 
 <body>
     <div class="load-screen">
-        <div class="spinner"></div>
+        <div class="spinner-wrap">
+    <div class="ring outer" id="spinner-outer"></div>
+    <div class="cutout outer-cut" id="spinner-oc"></div>
+    <div class="ring inner" id="spinner-inner"></div>
+    <div class="cutout inner-cut" id="spinner-ic"></div>
+    <div class="spinner-fill" id="spinner-fill"></div>
+  </div>
         <h3 class="load-text">Loading, Please wait</h3>
     </div>
 
@@ -165,6 +171,17 @@
         </div>
     </div>
 
+    <div class="upgrade-tree-sidebar">
+        <h2>Upgrade Name</h2>
+        <h3>Upgrade Description</h3>
+
+        <div class="uts-bottom">
+            <h4 class="price-1bhn">Upgrade Price</h4>
+            <h4>Upgrade (levels) bought</h4>
+
+            <button>Buy</button>
+        </div>
+    </div>
 
     <div class="inventory-overlay">
         <h3>Select an item:</h3>

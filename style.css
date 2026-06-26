@@ -839,3 +839,57 @@ h5 {
     background-color: rgb(66, 56, 43);
     border: 3px solid rgb(47, 41, 30);
 }
+
+.upgrade-tree-sidebar{
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7vw;
+    transition: flex 0.25s ease, width 0.25s ease, height 0.25s ease;
+    padding: 0.5vw;
+    background: var(--tiles-bg);
+    border: 3px solid var(--tiles-border);
+    border-radius: 20px 20px 0 20px;
+    overflow-y: hidden;
+    z-index: 10;
+
+    align-items: center;
+}
+
+.price-1bhn{
+    color: limegreen;
+}
+
+.uts-bottom{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    bottom: 1.5vw;
+}
+
+.uts-bottom button{
+    font-size: 20px;
+    font-weight: 700;
+    height: 35px;
+    width: 120%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+
+    background: var(--inv-btn-bg);
+    color: white;
+    border: var(--inv-btn-border) 2px solid;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: "SN Pro";
+    transition: background 0.2s ease, border 0.2s ease, scale 0.2s ease;
+    box-shadow: 0 0 10px 3px var(--inv-btn-shadow);
+}
+
+.uts-bottom button:hover {
+    background: var(--inv-btn-hover-bg);
+    border: var(--inv-btn-hover-border) 2px solid;
+    scale: 1.05;
+}
