@@ -1,4 +1,4 @@
-let purchasedDrills = [{ type: "coal", level: 1, miningTime: 0, upgradePrice: 100, firstCase: false }];
+let purchasedDrills = [{ type: "coal", level: 1, miningTime: 0, upgradePrice: 100}];
 let money = 100000;
 let moneyUpgradeTreeUnlocked = true;
 let furnaceUnlocked = true;

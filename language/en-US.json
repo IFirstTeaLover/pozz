@@ -29,7 +29,8 @@
         "loading": "Loading, please wait!",
         "selectItem": "Select an item:",
         "select": "Select",
-        "selectAll": "Select All"
+        "selectAll": "Select All",
+        "purchased": "Purchased"
     },
     "inventory": {
         "coal": "Coal",

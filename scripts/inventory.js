@@ -9,6 +9,14 @@ let types = {
     fuel: ["coal"]
 }
 
+let existingMaterials = new Set()
+
+const materialData = {
+    iron: { id: "iron-card", lang: "inventory.iron", img: "raw_iron.png" },
+    iron_ingot: { id: "iron-ingot-card", lang: "inventory.iron_ingot", img: "iron.png" },
+    coal: { id: "coal-card", lang: "inventory.coal", img: "coal.png" }
+};
+
 const closeButton = document.querySelector(".inventory-overlay-close");
 const overlay = document.querySelector(".inventory-overlay")
 
@@ -170,6 +178,16 @@ function newInventoryCard(className, name, image) {
     document.querySelector(".inventory-zone").appendChild(card)
     updateCards()
     updateInventoryCards()
+}
+
+function materialDiscovery(type) {
+    if (!existingMaterials.has(type) && materialData[type]) {
+        const data = materialData[type];
+        
+        newInventoryCard(data.id, data.lang, `./images/inventory/${data.img}`);
+
+        existingMaterials.add(type);
+    }
 }
 
 a(1)

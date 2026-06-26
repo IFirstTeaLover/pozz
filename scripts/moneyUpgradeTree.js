@@ -1,19 +1,26 @@
 const tooltip = document.querySelector(".tooltip");
 const origin = document.getElementById("origin");
-let tooltipPos = {x: 0, y: 0};
+let tooltipPos = { x: 0, y: 0 };
 
-const infos = [
-    { header: Game.translate("mup.ironDrill.header"), mainInfo: Game.translate("mup.ironDrill.mainInfo")},
-    { header: Game.translate("mup.copperDrill.header"), mainInfo: Game.translate("mup.copperDrill.mainInfo")},
-    { header: Game.translate("mup.betterCoal.header"), mainInfo: Game.translate("mup.betterCoal.mainInfo")},
-    { header: Game.translate("mup.furnace.header"), mainInfo: Game.translate("mup.furnace.mainInfo")},
-];
+let infos = []
+
+async function getInfos() {
+    await window.GameLanguage.ready;
+    infos = [
+        { header: Game.translate("mup.ironDrill.header"), mainInfo: Game.translate("mup.ironDrill.mainInfo") },
+        { header: Game.translate("mup.copperDrill.header"), mainInfo: Game.translate("mup.copperDrill.mainInfo") },
+        { header: Game.translate("mup.betterCoal.header"), mainInfo: Game.translate("mup.betterCoal.mainInfo") },
+        { header: Game.translate("mup.furnace.header"), mainInfo: Game.translate("mup.furnace.mainInfo") },
+    ];
+    return infos
+}
+getInfos();
 
 const upgrades = [
-    {price: 5000, max: 1, purchased: false},
-    {price: 50000, max: 1, purchased: false},
-    {price: 10000, max: 10, purchased: false, level: 0},
-    {price: 7500, max: 1, purchased: false}
+    { price: 5000, max: 1, purchased: false },
+    { price: 50000, max: 1, purchased: false },
+    { price: 10000, max: 10, purchased: false, level: 0 },
+    { price: 7500, max: 1, purchased: false }
 ]
 
 origin.addEventListener("pointermove", e => {
@@ -155,12 +162,12 @@ function showInfo(x, y, id) {
         clearTimeout(hideTimeout)
         hideTimeout = null
     }
-    
+
 
     tooltip.style.display = "block"
     tooltip.style.left = x + 15 + "px"
     tooltip.style.top = y + 15 + "px"
-    
+
     showFrame = requestAnimationFrame(() => {
         tooltip.classList.add("shown")
     })
@@ -173,7 +180,7 @@ function showInfo(x, y, id) {
         if (upgrades[id].purchased == false) {
             text[2].innerHTML = "$" + upgrades[id]?.price
         } else {
-            text[2].innerHTML = "Purchased"
+            text[2].innerHTML = Game.translate("etc.purchased")
         }
     } catch (e) { text[2].innerHTML = "Unknown" }
     tooltipPos.x = x;
@@ -203,9 +210,9 @@ function buyTreeUpgrade(id, purchaser) {
         case 0:
             if (enoughMoney) {
                 purchasedDrills.push({
-                    type: "iron", level: 1, miningTime: 0, upgradePrice: 1000, firstCase: true
+                    type: "iron", level: 1, miningTime: 0, upgradePrice: 1000
                 })
-                addUpgrade("inventory/iron.png", Game.translate("shopUpgrades.higherIronDrillSpeed.header") , Game.translate("shopUpgrades.higherIronDrillSpeed.mainInfo"), "1000", "iron-drill-speed")
+                addUpgrade("inventory/iron.png", Game.translate("shopUpgrades.higherIronDrillSpeed.header"), Game.translate("shopUpgrades.higherIronDrillSpeed.mainInfo"), "1000", "iron-drill-speed")
                 const newBar = document.querySelector(".progress-bar").cloneNode(true)
                 progressBar2 = newBar.querySelector(".progress-fill")
                 document.querySelector(".drills-zone").append(newBar)
@@ -237,6 +244,7 @@ function buyTreeUpgrade(id, purchaser) {
                 break;
             }
     }
+    showInfo(tooltipPos.x, tooltipPos.y, id)
 }
 
 a(4)

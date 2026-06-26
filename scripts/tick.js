@@ -82,6 +82,10 @@ function updateDom() {
             furnaceShown = true
         }
     }
+
+    Object.keys(inventory).forEach(item => {
+        if (inventory[item] > 0) if(item != "coal") materialDiscovery(item);
+    });
 }
 
 function updateInventoryCards() {
@@ -107,8 +111,6 @@ function tick(delta) {
 
         drill.miningTime += delta;
 
-
-
         if (drill.miningTime >= mineTime) {
             if (selectedTab == "drills") {
                 if (enableSFX) {
@@ -125,15 +127,6 @@ function tick(delta) {
 
             inventory[drill.type] = (inventory[drill.type] || 0) + 1;
             drill.miningTime = 0;
-
-            if (drill.firstCase) {
-                switch (drill.type) {
-                    case "iron":
-                        newInventoryCard("iron-card", "inventory.iron", "./images/inventory/raw_iron.png")
-                        drill.firstCase = false;
-                        break
-                }
-            }
         }
     })
 }

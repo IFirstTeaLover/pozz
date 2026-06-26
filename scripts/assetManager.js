@@ -12,7 +12,9 @@ let musics = [
 ]
 
 let images = [
-    "inventory/iron.png"
+    "inventory/iron.png",
+    "inventory/raw_iron.png",
+    "furnace.svg"
 ]
 
 let imagesDownloaded = {}
