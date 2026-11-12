@@ -22,6 +22,11 @@ const overlay = document.querySelector(".inventory-overlay")
 
 let prices = [20, 40, 200];
 
+function closeInventoryOverlay() {
+    overlay.style.transform = "translate(-50%, -50%) scale(0)";
+    document.body.classList.remove("inventory-overlay-open");
+}
+
 function updateCards() {
     let cards = Array.from(document.getElementsByClassName("inventory-zone")[0].children)
 
@@ -66,6 +71,7 @@ function openInventoryOverlay(executor, slot, inventoryType) {
     const inventory = document.querySelector(".inventory-zone");
     const transDef = "translate(-50%, -50%) scale(";
 
+
     // clone once, no double iteration
     overlayCards.replaceChildren(
         ...Array.from(inventory.children).map(card => card.cloneNode(true))
@@ -83,13 +89,12 @@ function openInventoryOverlay(executor, slot, inventoryType) {
         btnOne.textContent = Game.translate("etc.select");
         btnAll.textContent = Game.translate("etc.selectAll");
 
-        const close = () => overlay.style.transform = transDef + "0)";
-
-        btnOne.addEventListener("click", () => { selectOne(type, executor, slot, inventoryType); close(); }, { once: true });
-        btnAll.addEventListener("click", () => { selectAll(type, executor, slot, inventoryType); close(); }, { once: true });
+        btnOne.addEventListener("click", () => { selectOne(type, executor, slot, inventoryType); closeInventoryOverlay(); }, { once: true });
+        btnAll.addEventListener("click", () => { selectAll(type, executor, slot, inventoryType); closeInventoryOverlay(); }, { once: true });
     });
 
     overlay.style.transform = transDef + "1)";
+    document.body.classList.add("inventory-overlay-open");
 }
 
 function selectOne(type, executor, slot, inventoryType) {
@@ -111,7 +116,7 @@ function selectAll(type, executor, slot, inventoryType) {
 }
 
 closeButton.addEventListener("click", () => {
-    overlay.style.transform = "translate(-50%, -50%) scale(0)";
+    closeInventoryOverlay();
     overlay.querySelector(".overlay-cards").innerHTML = "";
 })
 
