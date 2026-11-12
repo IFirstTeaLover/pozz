@@ -48,13 +48,13 @@ function updateCards() {
 function sellOne(type, index) {
     if (inventory[type] > 0) {
         inventory[type] -= 1;
-        money += prices[index];
+        Game.money.add(prices[index])
     }
 }
 
 function sellAll(type, index) {
     if (inventory[type] > 0) {
-        money += inventory[type] * prices[index];
+        Game.money.add(inventory[type] * prices[index])
         inventory[type] = 0;
     }
 }
@@ -62,50 +62,34 @@ function sellAll(type, index) {
 updateCards()
 
 function openInventoryOverlay(executor, slot, inventoryType) {
-    const overlayCards = overlay.querySelector(".overlay-cards")
-    const inventory = document.querySelector(".inventory-zone")
-    overlayCards.innerHTML = inventory.innerHTML
+    const overlayCards = overlay.querySelector(".overlay-cards");
+    const inventory = document.querySelector(".inventory-zone");
+    const transDef = "translate(-50%, -50%) scale(";
 
-    const inventoryCards = Array.from(overlayCards.children)
-    const transDef = "translate(-50%, -50%) scale("
+    // clone once, no double iteration
+    overlayCards.replaceChildren(
+        ...Array.from(inventory.children).map(card => card.cloneNode(true))
+    );
 
-    inventoryCards.forEach(card => {
-        const invActionsPath = Array.from(Array.from(card.children)[3].children)
-        invActionsPath[0].innerHTML = Game.translate("etc.select")
-        invActionsPath[2].innerHTML = Game.translate("etc.selectAll")
-
-        invActionsPath[0].addEventListener("click", () => {
-            overlay.style.transform = transDef + "0)"
-        })
-
-        invActionsPath[2].addEventListener("click", () => {
-            overlay.style.transform = transDef + "0)"
-        })
-    })
-
-    overlay.style.transform = transDef + "1)"
-
-    let cards = Array.from(document.querySelector(".overlay-cards").children)
-
-    cards.forEach((card, index) => {
+    Array.from(overlayCards.children).forEach(card => {
         const type = Array.from(card.classList)
             .find(c => c.endsWith("-card") && c !== "inventory-card")
-            .replace("-card", "")
+            ?.replace("-card", "");
 
         const cardButtons = card.children[3];
-
         const btnOne = cardButtons.children[0];
         const btnAll = cardButtons.children[2];
 
-        if (btnOne._listener) btnOne.removeEventListener("click", btnOne._listener, slot);
-        if (btnAll._listener) btnAll.removeEventListener("click", btnAll._listener, slot);
+        btnOne.textContent = Game.translate("etc.select");
+        btnAll.textContent = Game.translate("etc.selectAll");
 
-        btnOne._listener = () => selectOne(type, executor, slot, inventoryType);
-        btnAll._listener = () => selectAll(type, executor, slot, inventoryType);
+        const close = () => overlay.style.transform = transDef + "0)";
 
-        btnOne.addEventListener("click", btnOne._listener);
-        btnAll.addEventListener("click", btnAll._listener);
+        btnOne.addEventListener("click", () => { selectOne(type, executor, slot, inventoryType); close(); }, { once: true });
+        btnAll.addEventListener("click", () => { selectAll(type, executor, slot, inventoryType); close(); }, { once: true });
     });
+
+    overlay.style.transform = transDef + "1)";
 }
 
 function selectOne(type, executor, slot, inventoryType) {
@@ -171,7 +155,7 @@ function retrieveFromInventory(amount, executor, type, slot, inventoryType) {
 function newInventoryCard(className, name, image) {
     card = coalCard.cloneNode(true)
     card.classList.replace("coal-card", className)
-    card.children[0].innerHTML = Game.translate(name)
+    card.children[0].textContent = Game.translate(name)
     ironAmount = card.querySelector(".inv-amount");
     card.querySelector(".item-preview").src = image
 

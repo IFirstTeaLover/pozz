@@ -1,5 +1,9 @@
 const tooltip = document.querySelector(".tooltip");
 const origin = document.getElementById("origin");
+
+const treeSidebar = document.querySelector(".upgrade-tree-sidebar");
+const sidebarBottom = treeSidebar.querySelector(".uts-bottom");
+
 let tooltipPos = { x: 0, y: 0 };
 
 let infos = []
@@ -174,18 +178,39 @@ function showInfo(x, y, id) {
 
     const text = tooltip.children
 
-    text[0].innerHTML = infos[id]?.header || "Failed to find tooltip header!"
-    text[1].innerHTML = infos[id]?.mainInfo || "Please try reloading"
+    text[0].textContent = infos[id]?.header || "Failed to find tooltip header!"
+    text[1].textContent = infos[id]?.mainInfo || "Please try reloading"
     try {
         if (upgrades[id].purchased == false) {
-            text[2].innerHTML = "$" + upgrades[id]?.price
+            text[2].textContent = "$" + upgrades[id]?.price
         } else {
-            text[2].innerHTML = Game.translate("etc.purchased")
+            text[2].textContent = Game.translate("etc.purchased")
         }
-    } catch (e) { text[2].innerHTML = "Unknown" }
+    } catch (e) { text[2].textContent = "Unknown" }
     tooltipPos.x = x;
     tooltipPos.y = y;
 
+}
+
+function showSidebarInfo(id){
+    const text = treeSidebar.children
+    const bottomText = sidebarBottom.children
+
+    treeSidebar.style.width = "15vw"
+
+    requestAnimationFrame(()=>{
+        treeSidebar.classList.add("open")
+    })
+
+    text[0].textContent = infos[id]?.header || "Failed to find tooltip header!"
+    text[1].textContent = infos[id]?.mainInfo || "Please try reloading"
+    try {
+        if (upgrades[id].purchased == false) {
+            bottomText[0].textContent = "$" + upgrades[id]?.price
+        } else {
+            bottomText[0].textContent = Game.translate("etc.purchased")
+        }
+    } catch (e) { bottomText[0].textContent = "Unknown"}
 }
 
 function hideInfo() {
@@ -203,9 +228,9 @@ function hideInfo() {
 
 function buyTreeUpgrade(id, purchaser) {
     if (upgrades[id].purchased) return
-    const enoughMoney = money >= upgrades[id].price
+    const enoughMoney = Game.money.get() >= upgrades[id].price
     const isMax = upgrades[id].max >= upgrades[id].level
-    if (enoughMoney) money -= upgrades[id].price
+    if (enoughMoney) Game.money.subtract(upgrades[id].price)
     switch (id) {
         case 0:
             if (enoughMoney) {

@@ -8,6 +8,7 @@ let state = 'spinning';
 let t1 = 0, angleCw = 0, angleCcw = 0;
 let arcOuter = 90, arcInner = 90;
 let fillProgress = 0;
+let doTick = true;
 
 const ro = document.getElementById('spinner-outer');
 const ri = document.getElementById('spinner-inner');
@@ -23,7 +24,14 @@ function easeInOut(x) {
     return x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x+2, 2)/2;
 }
 
+if (new URLSearchParams(location.search).get('vscode-livepreview') === 'true') {
+    document.querySelector('.load-screen')?.remove();
+    l.fill(true); // skip loading checks too if you want
+    doTick = false;
+}
+
 (function tick() {
+    if (!doTick) return
     t1 += 0.04;
 
     if (state === 'spinning') {
@@ -74,4 +82,4 @@ setInterval(() => {
             state = 'closing';
         }
     } else { t += 0.500 }
-}, 500)
+}, 1000)

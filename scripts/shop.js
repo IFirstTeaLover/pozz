@@ -7,9 +7,9 @@ function buyUpgrade(upg) {
             break;
 
         case "money-upgrade-tree":
-            if (money >= 2500) {
+            if (Game.money.get() >= 2500) {
                 moneyUpgradeTreeUnlocked = true
-                money -= 2500
+                Game.money.subtract(2500)
                 upg.remove()
             }
             break;
@@ -29,10 +29,10 @@ function addUpgrade(iconPath, header, info, price, _class) {
     } else {
         newUpgrade.querySelector(".upgrade-icon").src = iconPath;
     }
-    newUpgrade.querySelector(".upgrade-header-text").innerHTML = header
-    newUpgrade.querySelector(".upgrade-bottom-text").innerHTML = info
-    newUpgrade.querySelector(".upgrade-amount-text").innerHTML = Game.translate("etc.level") + ": 1"
-    newUpgrade.querySelector(".upgrade-price").innerHTML = "$" + price
+    newUpgrade.querySelector(".upgrade-header-text").textContent = header
+    newUpgrade.querySelector(".upgrade-bottom-text").textContent = info
+    newUpgrade.querySelector(".upgrade-amount-text").textContent = Game.translate("etc.level") + ": 1"
+    newUpgrade.querySelector(".upgrade-price").textContent = "$" + price
     newUpgrade.classList.replace("coal-drill-speed", _class)
     shopDiv.append(newUpgrade)
     updateShop()
@@ -53,12 +53,11 @@ function drillUpgrade(id, value, upg) {
     const levelsDisplay = upg.querySelector(".upgrade-amount-text");
     const priceDisplay = upg.querySelector(".upgrade-price");
 
-    if (money >= purchasedDrills[id].upgradePrice) {
+    if (Game.money.spend(purchasedDrills[id].upgradePrice)) {
         purchasedDrills[id].level = purchasedDrills[id].level + 1;
-        money -= purchasedDrills[id].upgradePrice;
         purchasedDrills[id].upgradePrice = purchasedDrills[id].upgradePrice + value;
-        priceDisplay.innerHTML = `$${purchasedDrills[id].upgradePrice}`;
-        levelsDisplay.innerHTML = Game.translate("etc.level") + ": " + purchasedDrills[id].level;
+        priceDisplay.textContent = `$${purchasedDrills[id].upgradePrice}`;
+        levelsDisplay.textContent = Game.translate("etc.level") + ": " + purchasedDrills[id].level;
     };
 }
 

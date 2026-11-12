@@ -9,6 +9,7 @@ let timeBeforeDomChange = 0;
 let delta
 
 const moneyDisplay = document.querySelector(".money-display")
+const moneyText = moneyDisplay.querySelector("p");
 
 let mupShown = false;
 let furnaceShown = false;
@@ -52,6 +53,7 @@ function updateDom() {
     if (document.hidden) return
     if (selectedTab == "drills") {
         progressBar.style.width = `${(purchasedDrills[0].miningTime) / ((5000 / purchasedDrills[0].level) / 100)}%`;
+        if (purchasedDrills[0].level >= 20){progressBar.style.width = "100%"}
         if (progressBar2 !== null) progressBar2.style.width = `${(purchasedDrills[1].miningTime) / ((5000 / (purchasedDrills[1].level / 2)) / 100)}%`;
     }
 
@@ -68,7 +70,7 @@ function updateDom() {
         }
     }
 
-    moneyDisplay.querySelector("p").textContent = money
+    moneyText.textContent = Game.money.get()
 
     if (moneyUpgradeTreeUnlocked) {
         if (!mupShown) {
@@ -119,6 +121,11 @@ function tick(delta) {
                     pop.onended = () => {
                         pop.remove();
                     }
+
+                    let drillVolume = (25 - drill.level * 2)/100
+                    if (drillVolume < 0) drillVolume = 0;
+                    pop.volume = drillVolume
+
                     pop.play().catch(e => {
                         console.warn("Failed to play sound:", e);
                     });

@@ -16,6 +16,8 @@ settingsSection.remove()
 notifDiv.remove()
 
 class Game {
+    static money = new Money(100000)
+    
     static Notification(msg) {
         let newNotifDiv = notifDiv.cloneNode(true);
 
@@ -34,7 +36,7 @@ class Game {
 
         hasNotifOngoing = true;
 
-        newNotifDiv.querySelector("h2").innerHTML = msg;
+        newNotifDiv.querySelector("h2").textContent = msg;
 
 
         let interval = setTimeout(() => {
@@ -50,7 +52,7 @@ class Game {
         let saveFile = {};
         let sf = saveFile;
 
-        sf["money"] = money;
+        sf["money"] = this.money.get();
         sf["mupUnlocked"] = moneyUpgradeTreeUnlocked;
         sf["furnace"] = furnaceUnlocked;
         sf["drills"] = purchasedDrills
@@ -78,7 +80,7 @@ class Settings {
     static newSection(sectionName){
         let newSection = settingsSection.cloneNode(true);
 
-        newSection.querySelector("p").innerHTML = sectionName
+        newSection.querySelector("p").textContent = sectionName
 
         document.querySelector(".settings").append(newSection)
 
@@ -89,7 +91,7 @@ class Settings {
         if (settingType == "checkmark"){
             let newCheckmark = settingsCheckmark.cloneNode(true);
 
-            newCheckmark.querySelector("h3").innerHTML = settingName
+            newCheckmark.querySelector("h3").textContent = settingName
 
             section.append(newCheckmark)
 
